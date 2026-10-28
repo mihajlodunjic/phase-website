@@ -1,6 +1,6 @@
 # PHASE — creative direction and implementation plan
 
-Status: faza 1 završena; PHASE Loop faze 2 dorađen kroz formu, satenski materijal, shader i zajednički kontroler. Desktop i mobilna emulacija provereni; fizički telefon preostaje. Audio engine nije dodat. Datum: 28. oktobar 2026.
+Status: faze 1 i 3 završene; PHASE Loop faze 2 dorađen. Studije, izbor, paneli i tok stranice rade lokalno bez zvuka. Desktop i mobilna emulacija provereni; fizički telefon preostaje. Audio engine nije dodat. Datum: 28. oktobar 2026.
 
 ## Sadržaj
 
@@ -333,14 +333,43 @@ funkcionalna faza je izbor i različiti proceduralni motivi studija.
 
 ### Faza 3 — studije i tok stranice
 
-Već postoji semantički tekstualni tok svih sekcija i funkcionalni anchor linkovi. Različiti motivi studija, izbor, paneli i njihovo kretanje još nisu implementirani.
-
-- [ ] FORM, ECHO i AFTERIMAGE imaju različite proceduralne motive.
-- [ ] Izbor i paneli rade bez audio aktivacije.
-- [ ] Statement, approach i studio sadržaj su završeni.
-- [ ] Sekcije imaju jasan ritam i funkcionalne anchor linkove.
+- [x] FORM, ECHO i AFTERIMAGE imaju različite proceduralne motive.
+- [x] Izbor i paneli rade bez audio aktivacije.
+- [x] Statement, approach i studio sadržaj su završeni.
+- [x] Sekcije imaju jasan ritam i funkcionalne anchor linkove.
+- [x] Mobilni meni, početni/povratni fokus i Tab/Shift+Tab kruženje provereni.
+- [x] Provereni 390 px i 320 px, uključujući sva tri panela i touch emulaciju.
 
 Dokaz: kompletna stranica korisna sa isključenim zvukom.
+
+Implementacija 28.10.2026: FORM je široka dominantna kompozicija sa koncentričnim
+metalnim površinama; ECHO prati precizne tačke i putanje; AFTERIMAGE je talasasta
+površina sa izduženim tragovima. Studije su parametarski inline SVG, uz postojeći
+jedan Three/Fiber renderer za hero. Nema novih medija, zavisnosti ili WebGL konteksta.
+
+Izbor koristi stabilne study ID-jeve. Native dijalog ima tri pristupačna taba,
+koncept i opis svakog motiva, vizuelni Replay motion i zajednički Motion toggle.
+ArrowLeft/Right, Home/End, Tab/Shift+Tab i Escape rade; zatvaranje vraća fokus na
+originalni opener. Play/Stop zvuka ostaje faza 4. AudioContext guard je tokom
+browser testa ostao na nuli. Paneli i motivi rade i kada WebGL nije dostupan.
+
+Approach koristi jednu formu sa smirivanjem između Listen, Shape i Refine stanja;
+na telefonu su sva tri koraka i njihove pojednostavljene forme u običnom toku.
+Mobilni meni otvara prvi link; anchor linkovi menjaju hash i fokusiraju sekciju.
+Sadržaj ostaje engleski i jasno označen kao konceptualan, bez klijenata ili nagrada.
+
+Prošli production build/typecheck, 28 unit testova i `qa/studies-checks.js`:
+sva tri panela na 1440, 768, 390 i 320 px, tabovi/fokus, reduced motion, završetak
+sekvence, replay, pozadinsko pauziranje i WebGL fallback. Prošao je i prethodni
+`qa/scene-checks.js`. Glavni dokazi: `artifacts/qa/phase3-work-1440.png`,
+`phase3-work-390.png`, `phase3-work-320.png`, `phase3-panel-320.png`.
+
+Uklonjeni su 320 px horizontalni preliv tabova i mobilna padding kolizija.
+Touch panel se skroluje unutar dijaloga, Close ostaje dostupan, pozadinska stranica
+miruje. Replay na telefonu vraća vizual u vidljivo polje. SVG update raspoređivač
+se deli između vidljivih motiva; pozadina se pauzira dok je panel otvoren, a
+panel sekvence se završavaju i oslobađaju aktivnu pretplatu. Ostaju fizički
+telefon, screen reader i Safari/Android provera. Rezultati i ograničenja: `QA.md`.
 
 ### Faza 4 — zvuk i povezivanje
 

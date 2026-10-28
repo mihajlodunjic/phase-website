@@ -92,3 +92,31 @@ and exercises both failure paths. It is separate from `npm test` and does not
 add a Playwright package to the site. `?surface=standard` provides the ordinary
 material fixture. Re-run these checks after any Three version change.
 # phase-website
+
+## Studies / phase 3
+
+The work section uses three different compositions with one palette and a shared
+satin-metal SVG gradient. FORM leads with a wide concentric sculpture; ECHO uses
+points and short routes; AFTERIMAGE uses projected wave bands and trailing lines.
+All paths are generated from local math. The hero remains the only WebGL renderer.
+
+```text
+FORM:       [ title + concept | dominant concentric form ]
+ECHO:       [ signal paths   | title + concept           ]
+AFTERIMAGE: [ title + concept | wide folded surface       ]
+```
+
+`src/sections/` owns the page sections. `StudyDialog` owns modal/tab semantics;
+selection uses `StudyId`, with independent visuals and no audio side effects.
+`visualScheduler.ts` shares one RAF request across eligible vector visuals;
+`useVisualActivity` gates updates by viewport, document visibility and motion.
+Panel sequences finish; replay starts them again and reveals the visual on mobile.
+`ProcessVisual` damps a bounded target and rests when settled. HTML carries all
+content and controls. Native modal focus is reinforced by `modalFocus.ts`.
+
+Run `qa/studies-checks.js` using the browser tool's filename option while preview
+is running on 4173. It covers study selection at desktop/mobile widths, reduced
+motion, finite sequence/replay, focus restoration, anchors, an AudioContext guard
+and no-WebGL operation. The prior `qa/scene-checks.js` remains valid for the hero.
+Keyboard patterns follow the [WAI tabs pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/)
+and [WAI modal dialog pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/).

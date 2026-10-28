@@ -1,9 +1,10 @@
 @import './tokens.css';
 @import './hero.css';
 @import './sections.css';
+@import './studies.css';
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 24px; color-scheme: dark; }
+html { scrollbar-gutter: stable; scroll-behavior: smooth; scroll-padding-top: 24px; color-scheme: dark; }
 body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--body); -webkit-font-smoothing: antialiased; }
 body:has(dialog[open]) { overflow: hidden; }
 button, input, textarea, select { font: inherit; }
@@ -27,7 +28,7 @@ svg { display: block; }
 .button-accent { color: var(--deep); background: var(--accent); border-color: var(--accent); }
 .button-accent:hover { background: var(--foreground); border-color: var(--foreground); }
 .button svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.4; }
-.section-space { padding-block: 96px; }
+
 section[id] { scroll-margin-top: 24px; }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+@media (prefers-reduced-motion: reduce) { html { scrollbar-gutter: stable; scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
 html:has([data-motion='off']) { scroll-behavior: auto; }

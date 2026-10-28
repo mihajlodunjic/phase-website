@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import type { RefObject } from 'react'
+import { trapModalTab } from '../lib/modalFocus'
 import { generateBrief } from '../lib/brief'
 
 export function ProjectBrief({ dialogRef }: { dialogRef: RefObject<HTMLDialogElement | null> }) {
@@ -8,7 +9,7 @@ export function ProjectBrief({ dialogRef }: { dialogRef: RefObject<HTMLDialogEle
   const output = useRef<HTMLTextAreaElement>(null)
 
   return (
-    <dialog ref={dialogRef} className="brief-dialog" aria-labelledby="brief-title" onClose={() => setStatus('')}>
+    <dialog ref={dialogRef} className="brief-dialog" onKeyDown={trapModalTab} aria-labelledby="brief-title" onClose={() => setStatus('')}>
       <div className="dialog-top"><span className="wordmark">PHASE/</span><button aria-label="Close project brief" onClick={() => dialogRef.current?.close()}>Close <span aria-hidden="true">×</span></button></div>
       <h2 id="brief-title">Start with a feeling.</h2>
       <p>Build a brief to keep or share. Your details stay in this browser; nothing is sent.</p>

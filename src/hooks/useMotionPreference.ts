@@ -10,6 +10,7 @@ export function useMotionPreference() {
     const media = window.matchMedia(query)
     const update = () => setReduced(media.matches)
     media.addEventListener('change', update)
+    update()
     return () => media.removeEventListener('change', update)
   }, [])
 

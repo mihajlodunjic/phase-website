@@ -168,3 +168,81 @@ ne zaključuje se GPU ubrzanje niti univerzalno ispunjen 60 fps cilj.
   Vite chunk-size i Three/Fiber Clock deprecation upozorenja ostaju zabeležena.
 - Sledeće su proceduralni motivi i izbor studija iz faze 3. Audio nije dodat;
   nema Git, remote, commit, push ili deployment akcija.
+
+## Faza 3 / studije i tok stranice
+
+Najnoviji prolaz: 28. oktobar 2026. Završene studije, izbor, paneli, statement,
+approach, studio i navigacija. Audio engine nije uveden; nema Play/Stop zvuka
+ili vizuelnih kontrola koje se lažno predstavljaju kao audio reprodukcija.
+
+### Izvršene provere
+
+- `npm.cmd run build`: typecheck i production build prošli, 57 modula.
+- `npm.cmd test`: **28/28**, 6 fajlova. Dodati su testovi stable-ID tab navigacije,
+  form impulsa, bounded signala i deformacije, process mapiranja, determinističke
+  geometrije, zajedničkog RAF vlasništva i oslobađanja završene sekvence.
+- `qa/studies-checks.js` izvršen protiv production preview-a na 4173, ceo prolaz
+  uspešan. Sačuvan je kao ponovljiv Playwright browser fixture.
+- Sva tri panela proverena na **1440, 768, 390 i 320 px** (12 kombinacija).
+  Uvek jedan vidljiv tabpanel; sva tri motiva su različita i svaki ima svoj opis.
+  Nema horizontalnog skrola stranice ili dijaloga.
+- Tabovi: Left/Right wrapping, Home/End, aktivacija, pravilan selected/tabindex.
+  Početni fokus na Close; Tab i Shift+Tab ostaju u dijalogu; Escape zatvara i
+  vraća fokus originalnom opener-u, čak i posle izbora druge studije.
+- Deljeni focus helper je provereno primenjen i na postojeći Project brief.
+  Shift+Tab sa Close vraća fokus na Generate brief; standardno zatvaranje ostaje.
+- Na 390 i 320 px provereni su Menu, početni fokus na Work, Escape/fokus na Menu,
+  sva tri anchor URL-a, zatvaranje menija i fokus na ciljnim sekcijama.
+- Reduced motion od učitavanja: sve studije i izbori rade, replay je disabled,
+  vizuali su stabilni. Prošla je i živa promena OS preference posle učitavanja.
+- FORM se skupi u jedan impuls i vrati; zatim `data-running=false` i frame count
+  prestaje da raste. Replay zaista ponovo pokreće sekvencu. Motivi iza panela
+  ostaju zaustavljeni. Izbor ECHO radi i dok je Motion off.
+- AudioContext/webkitAudioContext konstruktori su nadgledani: **0 kreiranja**
+  tokom svih study izbora, tabova, replay-a i zatvaranja. Bez audio zahteva.
+- Bez WebGL-a: hero koristi SVG fallback, a sve tri studije i paneli rade.
+- Rapid Listen → Shape → Refine → Listen → Refine završava na očekivanoj formi;
+  glavna forma se smiruje na scale ~0.37. Sav tekst procesa ostaje vidljiv.
+- Simulirani document.hidden zaustavio je SVG brojač na 3→3; povratak nastavlja
+  kretanje bez velikog delta skoka. Pravi OS/tab lifecycle ostaje ranije ograničenje.
+- Ponovljen `qa/scene-checks.js`: prethodni hero, sva 5 viewport-a, shader fallback,
+  WebGL fallback i 10 resize ciklusa prolaze; resursi ostaju 1/2/1.
+
+### Touch i vizuelni pregled
+
+- Chrome touch emulacija 390×844 / DPR 3: tap otvara ECHO i bira AFTERIMAGE.
+  Touch potez skroluje dijalog 116 px, pozadinski scroll ostaje 2156.8→2156.8.
+  Close je vidljiv pri y≈24 px i vraća fokus na View ECHO study.
+- Pregledani desktop FORM, ECHO i AFTERIMAGE, panel, statement/approach/studio
+  tok, 390 px i 320 px prikazi. Ispravljeni su preveliki mobilni razmak iz
+  kaskadne kolizije i četvoropikselni horizontalni preliv u 320 px tabovima.
+- Materijal i paleta ostaju charcoal/silver/acid. FORM je dominantan širok prikaz,
+  ECHO red sa manjim signalima, AFTERIMAGE suprotno postavljena široka površina.
+  Nisu uvedene tri jednake kartice, spoljni mediji, logoi klijenata ili testimonials.
+- Dokazi: `phase3-work-1440.png`, `phase3-work-390.png`, `phase3-work-320.png`,
+  `phase3-panel-320.png`, `phase3-form-pulse.png`, `phase3-approach-desktop.png`,
+  `phase3-touch-panel.png` u `artifacts/qa/`.
+
+### Opterećenje i granice
+
+Jedan postojeći WebGL Canvas. Studije i process forme su inline SVG, sa jednim
+zajedničkim update raspoređivačem ograničenim na najviše 30 update-a/s. On prestaje
+kada nema vidljivih aktivnih motiva; završene panel sekvence se odjavljuju.
+
+Na Chrome 155 / Windows / Intel UHD 620, viewport 1440×900, posle spremnosti
+hero scene i 30 uvodnih RAF-ova: 120 page RAF intervala, p50 16.7 / p95 17.0 /
+max 17.1 ms, bez long task događaja u uzorku. Vidljiv aktivan FORM imao je 44
+update-a tokom 1999 ms. To su browser intervali i SVG update brojači, ne GPU
+frame time ili potvrda cilja na fizičkom telefonu.
+
+Prvi uzorak započet pre završetka inicijalizacije zabeležio je long task 223 ms
+(p95 33.3 ms, max 249.7 ms). Ne pripisuje se precizan uzrok bez CPU trace-a;
+startup i zagrejani uzorak su odvojeni. Optimizacija učitavanja velike lazy 3D
+scene ostaje otvorena. Glavni JS sada 248.75 kB / 78.15 kB gzip, CSS 17.77 kB /
+4.39 kB gzip; Three scena 921.85 kB / 245.56 kB gzip.
+
+Normalni production pregled: 0 page/console grešaka; poznat Three/Fiber Clock
+warning i Vite chunk-size upozorenje ostaju. Mreža sadrži lokalni JS/CSS i SVG
+favicon; nema novih zavisnosti ili udaljenih medija. Još nisu provereni fizički
+telefon, Safari/Android i screen reader; sistemske fontove treba pregledati na
+njihovim stvarnim OS-ovima. Sledeća funkcionalna faza je Web Audio engine.
