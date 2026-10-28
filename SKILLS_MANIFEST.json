@@ -1,0 +1,116 @@
+{
+  "package": "PHASE local Codex kit",
+  "packaged_at": "2026-10-28",
+  "source_repository": "ATH-Organization/inl-website",
+  "source_ref": "front",
+  "source_commit": "7ad1c652ec7690ddc80c9b6974b3947d97c313f0",
+  "content_modified": false,
+  "destination_root": ".agents/skills",
+  "files": [
+    {
+      "source_path": ".claude/skills/awwwards-motion/README.md",
+      "destination": ".agents/skills/awwwards-motion/README.md",
+      "source_git_blob_sha": "6990678a466016fbc48072b1b7cb75d8a30a8169",
+      "source_size_bytes": 1976,
+      "sha256": "a2d5ee31723113d68ff518b397c9822b4e77be17cb7576476c7334eb24a0a356"
+    },
+    {
+      "source_path": ".claude/skills/awwwards-motion/SKILL.md",
+      "destination": ".agents/skills/awwwards-motion/SKILL.md",
+      "source_git_blob_sha": "c9dac763c195aaac5a0133fc85dc11ff36e7719b",
+      "source_size_bytes": 23783,
+      "sha256": "e08b590217f823c428b7efc80c9554ac7ab428c6b41dfaa06d69ec7ad97576ae"
+    },
+    {
+      "source_path": ".claude/skills/frontend-design/LICENSE.txt",
+      "destination": ".agents/skills/frontend-design/LICENSE.txt",
+      "source_git_blob_sha": "f433b1a53f5b830a205fd2df78e2b34974656c7b",
+      "source_size_bytes": 10174,
+      "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
+    },
+    {
+      "source_path": ".claude/skills/frontend-design/SKILL.md",
+      "destination": ".agents/skills/frontend-design/SKILL.md",
+      "source_git_blob_sha": "a5333457c414d20d625f307df945842c0952ecc3",
+      "source_size_bytes": 9390,
+      "sha256": "d91970639e9f5c37682ac7ab60094d35f1c7c1f38d731bd56396563aee10c1d3"
+    },
+    {
+      "source_path": ".claude/skills/threejs-accessibility/SKILL.md",
+      "destination": ".agents/skills/threejs-accessibility/SKILL.md",
+      "source_git_blob_sha": "d042de29fa187e66f57268a5e2a3ff6daecf5dd2",
+      "source_size_bytes": 1989,
+      "sha256": "01448e2c6533677f46e1e609a7da3c9e7e03a95bae70f6cb9942187c8c178cf8"
+    },
+    {
+      "source_path": ".claude/skills/threejs-animation/SKILL.md",
+      "destination": ".agents/skills/threejs-animation/SKILL.md",
+      "source_git_blob_sha": "58deab629aef059c07bad34b16a090e94947e3b7",
+      "source_size_bytes": 2108,
+      "sha256": "18b18c25ecf0e94b0208b16f8290bafc37e94da27ff5aa9697d326738769bdad"
+    },
+    {
+      "source_path": ".claude/skills/threejs-interaction/SKILL.md",
+      "destination": ".agents/skills/threejs-interaction/SKILL.md",
+      "source_git_blob_sha": "68a425e3203696f02881de21d012616e0be3be33",
+      "source_size_bytes": 1998,
+      "sha256": "b14af462a8766f07c1a5136f140aefde2eaa3b2fde5656d1da29ecb22eaeefe9"
+    },
+    {
+      "source_path": ".claude/skills/threejs-materials/SKILL.md",
+      "destination": ".agents/skills/threejs-materials/SKILL.md",
+      "source_git_blob_sha": "8e3b6956a3068fde2e7c4dfb23ca870394f5acdf",
+      "source_size_bytes": 2231,
+      "sha256": "95d0293de21e315b7ead8664193f3dadb35e25d59211d926d3a8373a0d09f85b"
+    },
+    {
+      "source_path": ".claude/skills/threejs-particles/SKILL.md",
+      "destination": ".agents/skills/threejs-particles/SKILL.md",
+      "source_git_blob_sha": "5ffdff3fa60c8d5d21761bd7477d7148947af99a",
+      "source_size_bytes": 2008,
+      "sha256": "a0f63aae0245ec8c1ddeb3bf471ba7f27f233095b10b7841f6805935902e28a3"
+    },
+    {
+      "source_path": ".claude/skills/threejs-performance/SKILL.md",
+      "destination": ".agents/skills/threejs-performance/SKILL.md",
+      "source_git_blob_sha": "14189766fce1523dfaf7b1aa64d431870b0d6e0f",
+      "source_size_bytes": 2202,
+      "sha256": "0d2617bacfb947b415ced97430a17a555fdbf41d21e7bcf5777f2a10141c0fbb"
+    },
+    {
+      "source_path": ".claude/skills/threejs-performance/references/profile.md",
+      "destination": ".agents/skills/threejs-performance/references/profile.md",
+      "source_git_blob_sha": "63faf2662a4c3ab197c63e5d00926ed4c25a53b7",
+      "source_size_bytes": 1927,
+      "sha256": "dcc20affee2c65803e55d5e2c74c21eadc13475963bef5746e363e40d28ffa2a"
+    },
+    {
+      "source_path": ".claude/skills/threejs-r3f/SKILL.md",
+      "destination": ".agents/skills/threejs-r3f/SKILL.md",
+      "source_git_blob_sha": "cb36f347ecc564b14c52ab76223ecff2e31ad7cb",
+      "source_size_bytes": 2302,
+      "sha256": "ce47c21e58b2ff9281450ca41e3f191a06030e8217399d4f074767ad6ee6fe4f"
+    },
+    {
+      "source_path": ".claude/skills/threejs-scene/SKILL.md",
+      "destination": ".agents/skills/threejs-scene/SKILL.md",
+      "source_git_blob_sha": "7a201b0e37a694aa9087aa0381d0473e9cad2f3a",
+      "source_size_bytes": 2318,
+      "sha256": "672300368113d314fc9475872142edd8fbe2e9d34cf5c2fe49173c18ccd6385f"
+    },
+    {
+      "source_path": ".claude/skills/threejs-shaders/SKILL.md",
+      "destination": ".agents/skills/threejs-shaders/SKILL.md",
+      "source_git_blob_sha": "5b45a84d93a34354e165798e6413c958f8ce0895",
+      "source_size_bytes": 2113,
+      "sha256": "96d58846953680f1c3565f67a2ea0e694f06d8d31106377f2451de1e233ad883"
+    },
+    {
+      "source_path": ".claude/skills/threejs-testing/SKILL.md",
+      "destination": ".agents/skills/threejs-testing/SKILL.md",
+      "source_git_blob_sha": "bd38a2ddd2cf9a12893a18356d90bd8485c71819",
+      "source_size_bytes": 2106,
+      "sha256": "2f8357c965aa8044737e79b2db7338da6e7897e8099316fcf1159d7f98c79907"
+    }
+  ]
+}

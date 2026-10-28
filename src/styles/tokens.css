@@ -1,0 +1,14 @@
+:root {
+  --background: #101211;
+  --deep: #080a09;
+  --surface: #1b1e1b;
+  --foreground: #ecede6;
+  --muted: #a6aca3;
+  --accent: #d8ff57;
+  --silver: #bac2bc;
+  --rule: rgba(236, 237, 230, 0.16);
+  --display: Impact, Haettenschweiler, 'Arial Narrow Bold', 'Arial Narrow', sans-serif;
+  --body: Arial, Helvetica, sans-serif;
+  --technical: Consolas, 'Liberation Mono', monospace;
+  --gutter: clamp(24px, 4.7vw, 80px);
+}

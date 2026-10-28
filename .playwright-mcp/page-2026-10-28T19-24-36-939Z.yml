@@ -1,0 +1,88 @@
+- generic [ref=f7e3]:
+  - link "Skip to content" [ref=f7e4] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=f7e5]:
+    - link "PHASE home" [ref=f7e6] [cursor=pointer]:
+      - /url: "#top"
+      - text: PHASE/
+    - button "Menu" [ref=f7e8] [cursor=pointer]:
+      - text: Menu
+      - generic [aria-hidden] [ref=f7e9]: +
+  - main [ref=f7e10]:
+    - region [ref=f7e11]:
+      - generic [ref=f7e12]:
+        - heading "SOUND, MADE VISIBLE." [level=1] [ref=f7e13]:
+          - generic [ref=f7e14]: SOUND,
+          - generic [ref=f7e15]: MADE
+          - generic [ref=f7e16]: VISIBLE.
+        - paragraph [ref=f7e17]: We shape how brands are heard. Sonic identities, product sounds and original compositions with a character of their own.
+        - link "Explore the studies" [ref=f7e18] [cursor=pointer]:
+          - /url: "#work"
+      - generic [ref=f7e29]:
+        - generic [ref=f7e30]: PHASE Loop
+        - generic [ref=f7e31]: A study in resonance
+      - generic [ref=f7e32]:
+        - generic [ref=f7e33]:
+          - generic [aria-hidden] [ref=f7e34]: ∿
+          - text: Independent sound studio
+        - button "Motion on" [ref=f7e35] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f7e36]: Ⅱ
+          - text: Motion on
+    - region [ref=f7e37]:
+      - heading "A brand is felt before it is explained." [level=2] [ref=f7e38]: A brand is feltbefore it is explained.
+      - paragraph [ref=f7e39]: A tone. A rhythm. A moment of recognition. We explore the details that make a sound unmistakably its own.
+    - region [ref=f7e40]:
+      - generic [ref=f7e41]:
+        - heading "Three ways to be heard." [level=2] [ref=f7e42]: Three waysto be heard.
+        - paragraph [ref=f7e43]: Self-initiated studiesin sound and motion.
+      - generic [ref=f7e44]:
+        - article [ref=f7e45]:
+          - heading "FORM" [level=3] [ref=f7e46]
+          - generic [ref=f7e47]:
+            - paragraph [ref=f7e48]: Sonic identity
+            - paragraph [ref=f7e49]: A compact sonic signature built on clarity, tension and release.
+          - generic [ref=f7e50]: Self-initiated study
+        - article [ref=f7e51]:
+          - heading "ECHO" [level=3] [ref=f7e52]
+          - generic [ref=f7e53]:
+            - paragraph [ref=f7e54]: Product sound
+            - paragraph [ref=f7e55]: Small signals that make digital interactions feel considered.
+          - generic [ref=f7e56]: Self-initiated study
+        - article [ref=f7e57]:
+          - heading "AFTERIMAGE" [level=3] [ref=f7e58]
+          - generic [ref=f7e59]:
+            - paragraph [ref=f7e60]: Original composition
+            - paragraph [ref=f7e61]: A slow-moving atmosphere that leaves a trace.
+          - generic [ref=f7e62]: Self-initiated study
+    - region [ref=f7e63]:
+      - heading "From intention to resonance." [level=2] [ref=f7e64]: From intentionto resonance.
+      - list [ref=f7e65]:
+        - listitem [ref=f7e66]:
+          - heading "Listen" [level=3] [ref=f7e67]
+          - paragraph [ref=f7e68]: "We start with context: the people, the feeling and the role sound needs to play."
+        - listitem [ref=f7e69]:
+          - heading "Shape" [level=3] [ref=f7e70]
+          - paragraph [ref=f7e71]: We explore a focused palette, finding the rhythm and texture that belong to the idea.
+        - listitem [ref=f7e72]:
+          - heading "Refine" [level=3] [ref=f7e73]
+          - paragraph [ref=f7e74]: We test the details across real moments, keeping what makes the sound clear and recognisable.
+    - region [ref=f7e75]:
+      - heading "A practice built around listening." [level=2] [ref=f7e76]: A practice builtaround listening.
+      - generic [ref=f7e77]:
+        - paragraph [ref=f7e78]: PHASE is an independent studio concept exploring the space between sound, identity and interaction. The work moves from the smallest interface signal to a complete sonic world.
+        - list [ref=f7e79]:
+          - listitem [ref=f7e80]: Sonic identities
+          - listitem [ref=f7e81]: Digital product sound
+          - listitem [ref=f7e82]: Original composition
+    - region [ref=f7e83]:
+      - heading "What should your brand sound like?" [level=2] [ref=f7e84]: What should yourbrand sound like?
+      - button "Start a project" [ref=f7e85] [cursor=pointer]:
+        - text: Start a project
+        - generic [aria-hidden] [ref=f7e86]: ↗
+  - contentinfo [ref=f7e87]:
+    - link "PHASE home" [ref=f7e88] [cursor=pointer]:
+      - /url: "#top"
+      - text: PHASE/
+    - paragraph [ref=f7e89]: Independent studio concept.Design & development by Mihajlo Dunjić.
+    - link "Back to top ↑" [ref=f7e90] [cursor=pointer]:
+      - /url: "#top"
