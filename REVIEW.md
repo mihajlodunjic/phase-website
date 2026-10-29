@@ -88,7 +88,7 @@ subjective audio listening. Arial was a deliberate fallback simulation, not a
 claim to have tested another operating system. Prior touch evidence remains in
 QA.md; this review repeats mobile viewport and touch-emulated performance paths.
 
-## Animation rework follow-up ? 2026-10-29
+## Animation rework follow-up — 2026-10-29
 
 The later user brief explicitly supersedes the former subtle motion direction.
 The prior UI findings/fixes above remain historical evidence. New motion work

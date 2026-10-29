@@ -1,6 +1,6 @@
 ﻿# PHASE — creative direction and implementation plan
 
-Status: faze 1?5 i kompletna lokalna motion dorada implementirane i pregledane. Stvarni WebGL2 renderer potvr?en; audio, studije i brief provereni. Fizi?ki telefon, Safari/Android, screen reader i subjektivno slu?anje ostaju za ru?nu proveru. Datum: 29. oktobar 2026. Detalji: ANIMATION_REWORK.md.
+Status: faze 1–5 i kompletna lokalna motion dorada implementirane i pregledane. Stvarni WebGL2 renderer potvrđen; audio, studije i brief provereni. Fizički telefon, Safari/Android, screen reader i subjektivno slušanje ostaju za ručnu proveru. Datum: 29. oktobar 2026. Detalji: ANIMATION_REWORK.md.
 
 ## Sadržaj
 
@@ -162,39 +162,39 @@ Footer: wordmark, anchor linkovi i jasan portfolio concept credit.
 
 ## 4. Glavna scena i motion sistem
 
-### PHASE Resonance Loop ? aktuelna specifikacija
+### PHASE Resonance Loop — aktuelna specifikacija
 
-Motion brief od 29.10.2026. zamenjuje raniju izrazitu suptilnost. Geometrija je zatvorena zategnuta traka sa zaobljenim tankim presekom, otvorom i kontrolisanom asimetrijom. Stati?na silueta mora ostati dobra; vidljiva promena povr?ine po?inje u prve 2?3 sekunde. Nema TorusKnot-a, bloom-a, magle niti preuzetih materijala.
+Motion brief od 29.10.2026. zamenjuje raniju izrazitu suptilnost. Geometrija je zatvorena zategnuta traka sa zaobljenim tankim presekom, otvorom i kontrolisanom asimetrijom. Statična silueta mora ostati dobra; vidljiva promena površine počinje u prve 2–3 sekunde. Nema TorusKnot-a, bloom-a, magle niti preuzetih materijala.
 
-Parametarski talas putuje du? same petlje u ciklusu od **8 s**: lokalno menja ?irinu, radijalnu napetost, dubinu i roll preseka. U-harmonici su celobrojni radi kontinuiteta na spoju. CPU rest mesh i shader koriste istu povr?inu. Normale i tangente se ra?unaju iz parcijalnih izvoda deformisane povr?ine, umesto osvetljenja nepokretne geometrije. Testovi proveravaju spoj, otvor, kona?nost i saturirane ulaze.
+Parametarski talas putuje duž same petlje u ciklusu od **8 s**: lokalno menja širinu, radijalnu napetost, dubinu i roll preseka. U-harmonici su celobrojni radi kontinuiteta na spoju. CPU rest mesh i shader koriste istu površinu. Normale i tangente se računaju iz parcijalnih izvoda deformisane površine, umesto osvetljenja nepokretne geometrije. Testovi proveravaju spoj, otvor, konačnost i saturirane ulaze.
 
-Satinirani srebrni PBR materijal deli proceduralno studijsko okru?enje sa FORM/AFTERIMAGE motivima: ?iroki srebrni paneli, uski akcenti i crne kartice. Bez HDRI/texture fajlova. Fina bru?ena komponenta je vrlo slaba i derivative-filtered. Geometrija, a ne beli sjaj, nosi pokret.
+Satinirani srebrni PBR materijal deli proceduralno studijsko okruženje sa FORM/AFTERIMAGE motivima: široki srebrni paneli, uski akcenti i crne kartice. Bez HDRI/texture fajlova. Fina brušena komponenta je vrlo slaba i derivative-filtered. Geometrija, a ne beli sjaj, nosi pokret.
 
-| Stanje | Zavr?eno pona?anje |
+| Stanje | Završeno ponašanje |
 | --- | --- |
 | Idle | 8 s travelling surface wave; sekundarna promena orijentacije 16 s. Ne predstavlja audio playback. |
-| Pointer | Sekundarni nagib, desktop doprinos do .06 rad po osi / mali canvas .025; kona?na quaternion orijentacija ograni?ena na 12?. |
-| Hero scroll | Mali lift/retreat/scale iz istog kontrolera; tekst ostaje nepomi?an i ?itljiv. |
-| Playing | Bass ? lokalna napetost do .5; mid ? twist do .32; high ? refleks do +18%; zasebni attack/release prelazi. |
+| Pointer | Sekundarni nagib, desktop doprinos do .06 rad po osi / mali canvas .025; konačna quaternion orijentacija ograničena na 12°. |
+| Hero scroll | Mali lift/retreat/scale iz istog kontrolera; tekst ostaje nepomičan i čitljiv. |
+| Playing | Bass → lokalna napetost do .5; mid → twist do .32; high → refleks do +18%; zasebni attack/release prelazi. |
 | Motion off / reduced motion | Rest phase 0, bez talasa, pomeranja i audio deformacije. Audio kontrole ostaju funkcionalne. |
-| Offscreen / modal / background | Nepotrebno renderovanje miruje. Skriven tab zaustavlja audio; povratak ne pokre?e zvuk. |
+| Offscreen / modal / background | Nepotrebno renderovanje miruje. Skriven tab zaustavlja audio; povratak ne pokreće zvuk. |
 
-Jedan sceneController poseduje hero vreme, pointer, scroll i audio targete. Telefon ima .82 amplitude talasa, .72 intenziteta rotacije, manje segmenata i DPR do 1.25. Full mesh je 160?32 (10,240 trouglova), mali 112?24 (5,376).
+Jedan sceneController poseduje hero vreme, pointer, scroll i audio targete. Telefon ima .82 amplitude talasa, .72 intenziteta rotacije, manje segmenata i DPR do 1.25. Full mesh je 160×32 (10,240 trouglova), mali 112×24 (5,376).
 
 ### Studije i Approach
 
-- **FORM:** devet instanciranih metalnih prstenova/traka. Doga?aj se prenosi u dubinu sa .095 s ka?njenja po sloju; lokalni prevoj i radijalna promena zamenjuju globalni kolaps. Audio i preview koriste FORM_EVENTS. Silent panel sekvenca 4.2 s, audio 8 s; kraj se smiruje i staje.
-- **ECHO:** sedam namerno komponovanih putanja povezuje osam ?vorova. Svetlosna glava i kratak trag putuju do slede?eg ?vora, koji reaguje pri dolasku. Synth i vizual dele ECHO_EVENTS; playback koristi stvarni AudioContext sat, preview traje 9 s.
-- **AFTERIMAGE:** 19 metalnih talasnih traka (13 na malom canvasu), stvarna deformacija polo?aja i normala kroz vreme. Dve diskretne istorije na ?.55 / ?1.1 s koriste i istorijsku audio energiju; postepeno nastaju i blede na kraju. Nema punog postprocessing lanca. Silent panel 8 s, audio 12 s.
-- **Approach:** istih pet traka kontinuirano prelazi iz Listen (razli?ite faze/otvorene linije), preko Shape (poravnata otvorena petlja), u Refine (precizna zatvorena struktura). Ru?ni izbor i keyboard kontrole ostaju autoritet; viewport ne preuzima izbor.
+- **FORM:** devet instanciranih metalnih prstenova/traka. Događaj se prenosi u dubinu sa .095 s kašnjenja po sloju; lokalni prevoj i radijalna promena zamenjuju globalni kolaps. Audio i preview koriste FORM_EVENTS. Silent panel sekvenca 4.2 s, audio 8 s; kraj se smiruje i staje.
+- **ECHO:** sedam namerno komponovanih putanja povezuje osam čvorova. Svetlosna glava i kratak trag putuju do sledećeg čvora, koji reaguje pri dolasku. Synth i vizual dele ECHO_EVENTS; playback koristi stvarni AudioContext sat, preview traje 9 s.
+- **AFTERIMAGE:** 19 metalnih talasnih traka (13 na malom canvasu), stvarna deformacija položaja i normala kroz vreme. Dve diskretne istorije na −.55 / −1.1 s koriste i istorijsku audio energiju; postepeno nastaju i blede na kraju. Nema punog postprocessing lanca. Silent panel 8 s, audio 12 s.
+- **Approach:** istih pet traka kontinuirano prelazi iz Listen (različite faze/otvorene linije), preko Shape (poravnata otvorena petlja), u Refine (precizna zatvorena struktura). Koraci se automatski smenjuju na 4 s dok je sekcija vidljiva i motion uključen. Klik ili keyboard izbor odmah postavlja korak i daje novi puni interval, uključujući klik na već aktivan korak. Van ekrana, iza modala, u skrivenom tabu i pri Motion off/reduced motion smena miruje; povratak daje puni interval bez preskakanja. Audio se ne pokreće.
 
-Hero ima jedan lazy R3F renderer. FORM/AFTERIMAGE dele jedan lazy Three renderer, fiksni framebuffer i proceduralno okru?enje; rezultat se prikazuje kroz 2D canvase, uklju?uju?i native dialog top-layer. Najvi?e dva stvarna WebGL konteksta po stranici, bez konteksta po kartici. Studije dele jedan scheduler od oko 30 a?uriranja/s sa o?uvanjem vremenskog ostatka. SVG je fallback, ne dokaz 3D rendera. Vlasnik stranice ?uva pool do finalnog unmount-a; pojedina?ni prikazi odla?u svoje geometrije/materijale.
+Hero ima jedan lazy R3F renderer. FORM/AFTERIMAGE dele jedan lazy Three renderer, fiksni framebuffer i proceduralno okruženje; rezultat se prikazuje kroz 2D canvase, uključujući native dialog top-layer. Najviše dva stvarna WebGL konteksta po stranici, bez konteksta po kartici. Studije dele jedan scheduler od oko 30 ažuriranja/s sa očuvanjem vremenskog ostatka. SVG je fallback, ne dokaz 3D rendera. Vlasnik stranice čuva pool do finalnog unmount-a; pojedinačni prikazi odlažu svoje geometrije/materijale.
 
 ### Ulazak i prelazi
 
-Jedna hero ulazna koreografija traje 1.15 s uz mali pomeraj; tekst ostaje vidljiv i bez uspeha animacije. Motion off je prekida trajno za taj ulazak. Nema ponovnog intro-a na toggle, identi?nog fade-up-a svakom tekstu, zaklju?avanja skrola ili velike prazne sticky sekcije. Velika povr?ina prelazi mirnije od trenutnog odgovora HTML kontrola.
+Jedna hero ulazna koreografija traje 1.15 s uz mali pomeraj; tekst ostaje vidljiv i bez uspeha animacije. Motion off je prekida trajno za taj ulazak. Nema ponovnog intro-a na toggle, identičnog fade-up-a svakom tekstu, zaključavanja skrola ili velike prazne sticky sekcije. Velika površina prelazi mirnije od trenutnog odgovora HTML kontrola.
 
-Ovaj odeljak je aktuelna motion specifikacija. Ranije brojke u fazama implementacije ispod ostaju istorija prethodnog rezultata. Stvarni dokazi i ograni?enja su u ANIMATION_REWORK.md i zavr?nom dodatku QA.md.
+Ovaj odeljak je aktuelna motion specifikacija. Ranije brojke u fazama implementacije ispod ostaju istorija prethodnog rezultata. Stvarni dokazi i ograničenja su u ANIMATION_REWORK.md i završnom dodatku QA.md.
 
 ## 5. Proceduralni zvuk
 
@@ -438,6 +438,16 @@ production browser provere. Pregledane su stvarne slike 1440/390/320 px i
 prikazi sa zamenskim fontom. Sačuvani su smer, sadržaj i postojeći proceduralni
 vizuali. Startup long tasks, veliki 3D chunk i neprovereni fizički uređaji ostaju
 jasno navedena ograničenja; ne tvrdi se stabilnih 60 fps ili WCAG certifikacija.
+
+### Motion dorada i automatski Approach
+
+- [x] Resonance Loop, FORM, AFTERIMAGE, ECHO i kontinuirani Listen/Shape/Refine implementirani i pregledani u stvarnom WebGL-u.
+- [x] Sačuvani pre/posle prikazi i lokalni snimci; četiri tražene veličine proverene. Merenja i ograničenja: ANIMATION_REWORK.md.
+- [x] Automatska smena Approach koraka na 4 s uz ručni izbor/reset intervala, keyboard i visibility/motion pauziranje.
+- [x] Uklonjene izdvojene tamne podloge FORM/ECHO i vizuala u panelima; transparentne animacije dele osnovnu pozadinu sajta.
+- [x] Browser provera punog ciklusa i ručnog resetovanja, modal/background/offscreen pauza, reduced motion i 390/320 px; bez audio aktivacije.
+- [ ] Fizički iOS/Android, Safari, screen reader, stvarni OS lifecycle i subjektivno slušanje ostaju ručne provere.
+- [ ] Startup/shader compilation i veliki zajednički Three chunk ostaju kandidati za optimizaciju.
 
 ## 10. Završni kriterijumi
 

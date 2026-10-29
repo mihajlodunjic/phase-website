@@ -1,26 +1,26 @@
-# PHASE animation rework ? 2026-10-29
+# PHASE animation rework — 2026-10-29
 
 Completed locally. Preview: http://127.0.0.1:4173/ (production), http://127.0.0.1:5173/ (dev).
 No dependencies, remote media, font files or audio samples added. Site content,
 navigation, brief, keyboard controls and single-context/single-voice audio retained.
 No commit, push, remote changes or deployment.
 
-## Before ? after
+## Before → after
 
-- **Hero:** tiny global oscillation ? thin sculptural Resonance Loop, 8 s travelling
+- **Hero:** tiny global oscillation → thin sculptural Resonance Loop, 8 s travelling
   width/tension/roll wave plus 16 s secondary orientation. Surface changes in the
-  first 2?3 s. Periodic seam, dynamic normals/tangents, satin chrome, broad silver
+  first 2–3 s. Periodic seam, dynamic normals/tangents, satin chrome, broad silver
   panels, narrow accents and black reflection cards. Text composition retained.
-- **FORM:** global shrink ? nine instanced metal rings with delayed depth impulses
-  and local folds. Pixel outline across .2/.85/1.65/3.7 s was 405?407 px wide and
-  287?297 px tall in a 534?380 canvas: no collapse into an empty frame.
-- **AFTERIMAGE:** precomputed bands translating ? actual travelling 3D ribbon
-  deformation. Two faint histories at ?.55/?1.1 s sample previous surface poses
+- **FORM:** global shrink → nine instanced metal rings with delayed depth impulses
+  and local folds. Pixel outline across .2/.85/1.65/3.7 s was 405–407 px wide and
+  287–297 px tall in a 534×380 canvas: no collapse into an empty frame.
+- **AFTERIMAGE:** precomputed bands translating → actual travelling 3D ribbon
+  deformation. Two faint histories at −.55/−1.1 s sample previous surface poses
   and previous smoothed energy; histories grow and fade, including the finite end.
-- **ECHO:** static paths with blinking nodes ? travelling head/trail, timed arrival,
+- **ECHO:** static paths with blinking nodes → travelling head/trail, timed arrival,
   node attack and release. Seven composed routes connect eight nodes. Shared
   synth/visual events avoid duplicated onset timing.
-- **Approach:** repeated ring scaling ? continuous five-strip morph from separated
+- **Approach:** repeated ring scaling → continuous five-strip morph from separated
   Listen through open Shape to precise closed Refine. User selection remains authoritative.
 - One 1.15 s hero entry, no repeated text reveal. Pointer stays secondary. Bass,
   mid and high have different bounded roles and attack/release. Silent previews
@@ -52,8 +52,8 @@ Windows 10 / Chrome 155, native WebGL2, ANGLE Intel UHD Graphics 620 / D3D11.
 Hero reported material=shader, ready=true, non-lost context. This environment
 successfully rendered real WebGL; fallback was tested separately, not graded as 3D.
 
-- Visually inspected **1440?900, 1280?720, 390?844 and 320?568**; 768?1024 and
-  640?360 reflow also covered by regression fixtures. Phone sizes are emulation.
+- Visually inspected **1440×900, 1280×720, 390×844 and 320×568**; 768×1024 and
+  640×360 reflow also covered by regression fixtures. Phone sizes are emulation.
 - Multiple animation instants, live pointer/selection/replay and three local
   canvas WebM clips. Source clips decoded successfully with non-empty pixels.
 - Motion off, reduced motion, silent selection, finite replay, three Approach
@@ -79,7 +79,7 @@ successfully rendered real WebGL; fallback was tested separately, not graded as 
 Local production preview, warmed samples, same Intel desktop GPU for both sizes.
 No CPU/network throttling. Query times below exclude presentation/compositing.
 
-| Measurement | 1440?900 DPR1 | 390?844 DPR3 emulation |
+| Measurement | 1440×900 DPR1 | 390×844 DPR3 emulation |
 | --- | ---: | ---: |
 | Hero warm RAF p50 / p95 | 16.6 / 17.0 ms | 16.6 / 17.0 ms |
 | Hero GPU mesh draw p50 / p95 | 2.21 / 2.27 ms | 1.11 / 1.13 ms |
@@ -98,7 +98,7 @@ zero long tasks; page RAF p95 was 26 ms in that instrumented run. Do not combine
 those RAF samples with the later hero sample to claim a universal frame rate.
 
 Hero startup ready ~882 / 795 ms, longest startup long task 310 / 245 ms. New
-material compilation on some panel switches still took ~57?63 ms in diagnostics.
+material compilation on some panel switches still took ~57–63 ms in diagnostics.
 Shader warm-up/startup and the shared Three chunk remain profiling candidates.
 Hero modal/motion-off counters stayed unchanged; pool counters stabilized across
 switch/resize cycles. Counters do not measure native GC or exact GPU memory.
@@ -130,3 +130,10 @@ Visibility/BFCache/interruption events were simulated. SVG is a simplified
 fallback, not visually equivalent to the 3D surface. System font differences
 remain platform-dependent. Remote repo/live reference fetch failed; visual
 judgment and fixes used the actual local build. Nothing was published.
+
+## Follow-up: automatic Approach steps
+
+Listen / Shape / Refine now cycle every 4 seconds while visible and motion is on.
+Manual click/keyboard selection resets the full interval, even on the current
+step. Motion off/reduced motion, offscreen, hidden tab and modal ownership pause
+the timer. qa/approach-cycle-checks.js passed these behaviors and 390/320 layouts.

@@ -521,7 +521,7 @@ RAF ritam u odnosu na ranije ne pripisuje UI ispravkama. 60 fps nije potvrđeno.
 Fizički uređaji, Safari/screen reader, real OS lifecycle i slušanje ostaju
 neprovereni; opseg, resursi, backend i dokazi navedeni su u `REVIEW.md`.
 
-## Animation rework ? 2026-10-29 (current motion brief)
+## Animation rework → 2026-10-29 (current motion brief)
 
 This section supersedes the historical 18 s / tiny-amplitude motion results above.
 Full change/evidence index: ANIMATION_REWORK.md. Native WebGL2 was available:
@@ -541,9 +541,9 @@ Completed checks:
 - rework-fallback-checks: injected shader error and native context loss both
   exposed SVG + failure reason; HTML panel selection and real audio still worked.
 - rework-performance-checks, rework-gpu-checks and rework-page-captures passed.
-  Actual initialized 3D captures at 1440?900 / 1280?720 / 390?844 / 320?568.
+  Actual initialized 3D captures at 1440×900 / 1280×720 / 390×844 / 320×568.
   Motion-off/reduced motion, pointer/replay, menu/focus/brief, short panel scrolling
-  and no-WebGL behavior covered. Additional 768?1024 / 640?360 reflow regressions.
+  and no-WebGL behavior covered. Additional 768×1024 / 640×360 reflow regressions.
 - Actual clipboard read-back and missing/denied clipboard fallback passed at
   1440/1280/768/390/320. DOM contrast sample min 8.11:1 page / 7.25:1 form.
 - All four scores ended at 4/8/9/12 s, zero voice/energy, four shared nodes,
@@ -555,7 +555,7 @@ Completed checks:
 Production preview on 4173, no CPU/network throttle. Same desktop GPU for both
 sizes; phone emulation is not a physical phone. Warming/browser caches apply.
 
-| Sample | 1440?900 DPR1 | 390?844 DPR3 emulation |
+| Sample | 1440×900 DPR1 | 390×844 DPR3 emulation |
 | --- | ---: | ---: |
 | Hero ready from navigation | ~882 ms | ~795 ms |
 | Longest startup long task | 310 ms | 245 ms |
@@ -573,11 +573,11 @@ submit/copy means API wall time, not completed GPU work. Instrumented study
 fixture sampled ~30 visual updates/s and RAF p95 ~26 ms. No warm long tasks
 in these samples. These different fixtures do not prove a universal FPS target.
 
-Hero modal frames 260?260 / 270?270; motion-off 268?268 / 277?277. Resources
+Hero modal frames 260→260 / 270→270; motion-off 268→268 / 277→277. Resources
 1 geometry / 2 textures / 1 program. Study pool uses one instanced surface draw
 FORM, or surface + two history draws AFTERIMAGE, stable resources across cycles.
 Pool remains owned by page to avoid new contexts per selection. Some first
-material draws on tab switch still measured ~57?63 ms compilation/submission;
+material draws on tab switch still measured ~57–63 ms compilation/submission;
 startup shader work and bundle weight remain limits. Resource counters do not
 measure exact GPU memory or native GC.
 
@@ -594,3 +594,16 @@ Remaining: physical iOS/Android, Safari, assistive technology, real zoom/pinch,
 OS-level lifecycle and subjective listening. Visibility/interruption/BFCache
 are event simulations. No WCAG or physical-mobile/60fps claim. Remote reference
 could not be fetched; local real render was used. All work remains local.
+
+## Approach automatic steps
+
+Steps advance every 4 seconds while visible with motion enabled. Clicking any
+step, including the active one, immediately selects it and resets the interval.
+The existing continuous morph and keyboard buttons remain. Motion off, reduced
+motion, hidden document, offscreen and modal-obscured states cancel the timer.
+
+Real-timer browser fixture qa/approach-cycle-checks.js passed the full
+Listen/Shape/Refine cycle, manual/current-step reset, keyboard selection and all
+five pause gates. Desktop 1440x900 and mobile 390x844 / 320x568 inspected; no
+overflow, page errors or AudioContext activation. Screenshots: approach-auto-*.png.
+Production build/typecheck passed; existing Vite chunk-size warning remains.
