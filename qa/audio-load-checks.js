@@ -18,7 +18,7 @@ async (page) => {
         poses.push(JSON.parse(document.querySelector('.phase-visual').dataset.pose))
       }
       observer.disconnect(); intervals.sort((a, b) => a - b)
-      return { p50: intervals[60], p95: intervals[114], max: intervals[119], longTasks, maxEnergy: Math.max(...energy), maxBreath: Math.max(...poses.map(p => Math.abs(p.breath))), maxTwist: Math.max(...poses.map(p => Math.abs(p.twist))), maxShine: Math.max(...poses.map(p => p.shine)) }
+      return { p50: intervals[60], p95: intervals[114], max: intervals[119], longTasks, maxEnergy: Math.max(...energy), maxTension: Math.max(...poses.map(p => Math.abs(p.tension))), maxTwist: Math.max(...poses.map(p => Math.abs(p.twist))), maxShine: Math.max(...poses.map(p => p.shine)) }
     })
     await test.evaluate(async () => { for(let i = 0; i < 30; i++) await new Promise(requestAnimationFrame) })
     const idle = await sample()
@@ -26,7 +26,7 @@ async (page) => {
     await test.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }))
     await test.waitForFunction(() => JSON.parse(document.querySelector('[data-audio-debug]').dataset.energy).level > .01)
     const playing = await sample()
-    if (idle.maxEnergy !== 0 || playing.maxEnergy <= 0 || playing.maxBreath > .021 || playing.maxTwist > .04 || playing.maxShine > 1.12) throw new Error('Energy/visual bounds')
+    if (idle.maxEnergy !== 0 || playing.maxEnergy <= 0 || playing.maxTension > .5 || playing.maxTwist > .32 || playing.maxShine > 1.18) throw new Error('Energy/visual bounds')
     await test.screenshot({ path: 'artifacts/qa/phase4-audio-hero.png' })
     await test.getByRole('button', { name: 'Stop playback', exact: true }).click()
     await test.waitForFunction(() => document.querySelector('[data-audio-debug]').dataset.voices === '0')

@@ -32,11 +32,10 @@ export const echoNodes = [
   [110, 300], [180, 195], [280, 195], [352, 285],
   [420, 285], [475, 150], [578, 150], [620, 260],
 ] as const
-export const echoPaths = [
-  'M110 300V250Q110 195 180 195H280Q310 195 324 240L335 266Q342 285 352 285H420',
-  'M420 285Q475 285 475 226V150H578Q620 150 620 195V260',
-  'M180 195V116Q180 90 213 90H300',
-]
+export const echoPaths = echoNodes.slice(0,-1).map((from,index)=>{
+  const to=echoNodes[index+1],dx=to[0]-from[0]
+  return `M${from[0]} ${from[1]}C${from[0]+dx*.65} ${from[1]} ${to[0]-dx*.65} ${to[1]} ${to[0]} ${to[1]}`
+})
 
 export function createAfterimageBands(count = 19) {
   const sample = (x: number, row: number): Point => {
@@ -51,3 +50,4 @@ export function createAfterimageBands(count = 19) {
     return { d: contour([...top, ...bottom]), edge: top.map((p, i) => `${i ? 'L' : 'M'}${n(p[0])},${n(p[1])}`).join(' ') }
   })
 }
+

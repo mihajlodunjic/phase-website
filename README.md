@@ -24,8 +24,8 @@ Development preview: `http://127.0.0.1:5173/`. Production preview defaults to
 The headline is a three-line block on the left; the sculpture occupies the
 right half. On narrow screens they stack in reading order. The quiet statement
 provides a pause before the studies. FORM is a dominant concentric form; ECHO
-uses points and routes; AFTERIMAGE uses projected wave bands and trailing lines.
-The three compositions share a satin-metal SVG gradient and system typography.
+uses points and travelling signals; AFTERIMAGE uses deforming 3D wave ribbons and
+time-delayed traces. They share a silver/charcoal material language and system typography.
 
 Colors follow the brief: charcoal `#101211`, deep `#080A09`, surface `#1B1E1B`,
 foreground `#ECEDE6`, silver `#BAC2BC`, acid `#D8FF57`. System Impact is the
@@ -39,26 +39,34 @@ particle fog, stock TorusKnot, texture files or HDRI.
 
 ## Visual architecture
 
-- HTML contains all text, navigation, buttons, tabs and status; Canvas is decorative.
-- One lazy, demand-based Fiber renderer. An authored SVG remains visible while
-  loading and when WebGL fails or its context is lost.
-- `sceneController.ts` owns time, pointer, scroll and audio targets, quaternion
-  settling and uniform damping. The 18-second idle cycle has a total tilt budget
-  near 7 degrees. Compact canvases use smaller motion and geometry budgets.
-- Shader breath/twist idle limits are ±0.009 / ±0.018; audio extends their total
-  limits to ±0.021 / ±0.04. The high band can add at most 12% reflection strength.
-  Phone audio contributions are scaled by 0.55. Motion off resets all channels.
-- `shaders/brushedChrome.ts` extends the pinned Three r186 physical chunks.
-  Normals use the analytic inverse-transpose deformation Jacobian, tangents its
-  forward Jacobian; Three's normalMatrix and color/tone mapping remain intact.
-- Shader failure selects an ordinary metallic material; WebGL failure selects
-  the SVG. `?surface=standard` exposes the material fallback fixture.
-- `visualScheduler.ts` shares one RAF request for eligible vector motifs, capped
-  at 30 updates/s. Offscreen, hidden and paused motifs unsubscribe. Panel visual
-  sequences finish; Replay motion explicitly restarts them while audio is off.
-- Native scrolling and zoom remain available. Decorative pointer tilt is mouse/
-  pen only. Geometry, materials, environment targets and listeners have owners
-  and cleanup. The hero remains the only WebGL renderer.
+- Semantic HTML owns every label and control. All Canvas/SVG visuals are decorative.
+- Hero: one lazy demand-based R3F renderer. Resonance Loop is a closed thin ribbon
+  with an 8-second travelling surface wave and secondary 16-second orientation cycle.
+  Pointer is secondary; final quaternion tilt is capped at 12 degrees.
+- sceneController.ts owns time, pointer, scroll and audio targets. Bass tension,
+  mid twist and high reflection use separate bounded attack/release channels.
+  Compact views use lower deformation/rotation, tessellation and capped DPR.
+- resonanceSurface.ts shares the CPU rest surface and GLSL parameterization.
+  Deformed partial derivatives supply normals/tangents; Three PBR/tone mapping remains.
+  Code-generated light panels and black cards create the reflection environment.
+- FORM/AFTERIMAGE use a second, **shared** lazy Three renderer. It renders into a
+  fixed framebuffer, then presents each view through a 2D canvas. This supports
+  native dialog top-layer without a GL context per panel. Maximum two native
+  contexts per page, with one pool kept by the page and view resources disposed.
+- FORM has nine instanced rings, delayed depth impulses and a stable outer contour.
+  AFTERIMAGE has 19 ribbons / 13 compact, travelling deformation and two delayed
+  histories sampling both previous positions and previous audio energy.
+- ECHO is SVG: one travelling signal follows composed routes between eight nodes.
+  ECHO_EVENTS and FORM_EVENTS are shared with the synth. Playback reads the native
+  audio clock; visual previews never create/resume audio.
+- visualScheduler.ts shares a 30 Hz update request across eligible study/process
+  motifs. It carries timing remainder; no per-frame React state. Panel sequences
+  finish and Replay motion restarts only the visual. Ended audio does not restart idle.
+- Approach morphs the same five strips through separated Listen, open-loop Shape
+  and closed Refine states. No scroll takeover. Hero has one short, non-repeating intro.
+- Motion off/reduced motion is a composed static state. Offscreen, obscured and
+  hidden views rest. Shader/context failures retain diagnostics and a meaningful SVG.
+  Hero material failure can use standard PBR; ?surface=standard exposes that fixture.
 
 ## Audio / phase 4
 
@@ -166,7 +174,8 @@ smaller display size so both hero actions remain visible.
 observer. It gates each view by viewport intersection, page visibility, motion
 and modal ownership. Decorative visuals behind a modal rest; a study motif
 inside that modal can run. This avoids using GPU work to animate an obscured
-hero. The existing slow motion budgets and reduced-motion static states remain.
+hero. Reduced-motion static states remain; the updated visible motion budgets are
+documented in ANIMATION_REWORK.md.
 
 Additional production browser functions:
 
@@ -189,3 +198,12 @@ technology and subjective audio listening remain manual verification limits.
 Arial layouts, visual/audio note states and delayed-start messages. Execute with
 the browser tool against production preview on 4173. `REVIEW.md` records the
 confirmed findings, before/after evidence, fixes and verification limits.
+
+## Animation rework / 2026-10-29
+
+See [ANIMATION_REWORK.md](ANIMATION_REWORK.md) for completed work, actual WebGL
+inspection, measurements, screenshots/videos and verification limits. Additional
+fixtures: rework-checks, rework-audio-checks, rework-fallback-checks,
+rework-performance-checks, rework-gpu-checks and rework-page-captures in qa/.
+Browser fixtures are functions loaded by the Playwright tool, not npm scripts.
+Local QA WebM files live under artifacts/qa/rework-clips/ and are not app assets.

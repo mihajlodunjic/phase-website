@@ -1,4 +1,6 @@
-﻿import { useRef } from 'react'
+﻿import { useEffect,useRef } from 'react'
+import { attachStudyRenderers } from '../visuals/studyRendererLifetime'
+import { useHeroIntro } from '../hooks/useHeroIntro'
 import { Header } from '../components/Header'
 import { ProjectBrief } from '../components/ProjectBrief'
 import { PhaseCanvas } from '../scene/PhaseCanvas'
@@ -12,14 +14,16 @@ import { AudioDiagnostics, AudioPlayButton, GlobalAudioPlayer } from '../compone
 import { MotionControl } from '../components/MotionControl'
 
 export function App() {
+  useEffect(attachStudyRenderers,[])
   const motion = useMotionPreference()
+  const intro = useHeroIntro(motion.enabled)
   const { engine } = useAudio()
   const brief = useRef<HTMLDialogElement>(null)
   const briefOpener = useRef<HTMLElement | null>(null)
   const openBrief = () => { briefOpener.current = document.activeElement as HTMLElement; engine.stop('brief'); brief.current?.showModal() }
 
   return (
-    <div id="top" tabIndex={-1} onClick={event => {
+    <div id="top" data-intro={intro ? 'on' : 'off'} tabIndex={-1} onClick={event => {
       if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return
       const link = (event.target as Element).closest<HTMLAnchorElement>('a[href^="#"]')
       const target = link?.getAttribute('href')?.slice(1)

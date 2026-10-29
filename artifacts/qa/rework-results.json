@@ -1,0 +1,981 @@
+{
+  "date": "2026-10-29",
+  "environment": "Windows 10 / Chrome 155 / ANGLE Intel UHD 620 / D3D11; phone emulation, not physical",
+  "motion": {
+    "layouts": [
+      {
+        "width": 1440,
+        "height": 900
+      },
+      {
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "width": 390,
+        "height": 844
+      },
+      {
+        "width": 320,
+        "height": 568
+      }
+    ],
+    "errors": [],
+    "formBounds": [
+      {
+        "time": 0.2,
+        "width": 407,
+        "height": 297,
+        "canvasWidth": 534,
+        "canvasHeight": 380
+      },
+      {
+        "time": 0.85,
+        "width": 405,
+        "height": 292,
+        "canvasWidth": 534,
+        "canvasHeight": 380
+      },
+      {
+        "time": 1.65,
+        "width": 405,
+        "height": 287,
+        "canvasWidth": 534,
+        "canvasHeight": 380
+      },
+      {
+        "time": 3.7,
+        "width": 406,
+        "height": 287,
+        "canvasWidth": 534,
+        "canvasHeight": 380
+      }
+    ],
+    "cycles": [
+      {
+        "contexts": 2,
+        "created": 2,
+        "max": 2,
+        "studyVisual": "",
+        "motif": "afterimage",
+        "renderer": "webgl",
+        "audioReactive": "false",
+        "running": "true",
+        "frames": "4",
+        "elapsed": "0.04980000000000291",
+        "audioEnergy": "0",
+        "surfaceTime": "0.04980000000000291",
+        "ready": "true",
+        "submitMs": "1.700000286102295",
+        "triangles": "26752",
+        "calls": "3",
+        "poolViews": "1",
+        "poolGeometries": "3",
+        "poolTextures": "2",
+        "poolPrograms": "2",
+        "historyTime": "0"
+      },
+      {
+        "contexts": 2,
+        "created": 2,
+        "max": 2,
+        "studyVisual": "",
+        "motif": "form",
+        "renderer": "webgl",
+        "audioReactive": "false",
+        "running": "true",
+        "frames": "3",
+        "elapsed": "0",
+        "audioEnergy": "0",
+        "surfaceTime": "0",
+        "ready": "true",
+        "submitMs": "57",
+        "triangles": "12672",
+        "calls": "1",
+        "poolViews": "1",
+        "poolGeometries": "1",
+        "poolTextures": "2",
+        "poolPrograms": "1",
+        "historyTime": "0"
+      },
+      {
+        "contexts": 2,
+        "created": 2,
+        "max": 2,
+        "studyVisual": "",
+        "motif": "afterimage",
+        "renderer": "webgl",
+        "audioReactive": "false",
+        "running": "true",
+        "frames": "4",
+        "elapsed": "0.05",
+        "audioEnergy": "0",
+        "surfaceTime": "0.05",
+        "ready": "true",
+        "submitMs": "0.7000002861022949",
+        "triangles": "26752",
+        "calls": "3",
+        "poolViews": "1",
+        "poolGeometries": "3",
+        "poolTextures": "2",
+        "poolPrograms": "2",
+        "historyTime": "0"
+      },
+      {
+        "contexts": 2,
+        "created": 2,
+        "max": 2,
+        "studyVisual": "",
+        "motif": "form",
+        "renderer": "webgl",
+        "audioReactive": "false",
+        "running": "true",
+        "frames": "4",
+        "elapsed": "0.049899999999997814",
+        "audioEnergy": "0",
+        "surfaceTime": "0.049899999999997814",
+        "ready": "true",
+        "submitMs": "0.7999997138977051",
+        "triangles": "12672",
+        "calls": "1",
+        "poolViews": "1",
+        "poolGeometries": "1",
+        "poolTextures": "2",
+        "poolPrograms": "1",
+        "historyTime": "0"
+      },
+      {
+        "contexts": 2,
+        "created": 2,
+        "max": 2,
+        "studyVisual": "",
+        "motif": "afterimage",
+        "renderer": "webgl",
+        "audioReactive": "false",
+        "running": "true",
+        "frames": "4",
+        "elapsed": "0.05",
+        "audioEnergy": "0",
+        "surfaceTime": "0.05",
+        "ready": "true",
+        "submitMs": "0.8999996185302734",
+        "triangles": "26752",
+        "calls": "3",
+        "poolViews": "1",
+        "poolGeometries": "3",
+        "poolTextures": "2",
+        "poolPrograms": "2",
+        "historyTime": "0"
+      },
+      {
+        "contexts": 2,
+        "created": 2,
+        "max": 2,
+        "studyVisual": "",
+        "motif": "form",
+        "renderer": "webgl",
+        "audioReactive": "false",
+        "running": "true",
+        "frames": "3",
+        "elapsed": "0",
+        "audioEnergy": "0",
+        "surfaceTime": "0",
+        "ready": "true",
+        "submitMs": "63.40000009536743",
+        "triangles": "12672",
+        "calls": "1",
+        "poolViews": "1",
+        "poolGeometries": "1",
+        "poolTextures": "2",
+        "poolPrograms": "1",
+        "historyTime": "0"
+      },
+      {
+        "contexts": 2,
+        "created": 2,
+        "max": 2,
+        "studyVisual": "",
+        "motif": "afterimage",
+        "renderer": "webgl",
+        "audioReactive": "false",
+        "running": "true",
+        "frames": "4",
+        "elapsed": "0.05",
+        "audioEnergy": "0",
+        "surfaceTime": "0.05",
+        "ready": "true",
+        "submitMs": "1.0999999046325684",
+        "triangles": "26752",
+        "calls": "3",
+        "poolViews": "1",
+        "poolGeometries": "3",
+        "poolTextures": "2",
+        "poolPrograms": "2",
+        "historyTime": "0"
+      },
+      {
+        "contexts": 2,
+        "created": 2,
+        "max": 2,
+        "studyVisual": "",
+        "motif": "form",
+        "renderer": "webgl",
+        "audioReactive": "false",
+        "running": "true",
+        "frames": "4",
+        "elapsed": "0.04989999999999782",
+        "audioEnergy": "0",
+        "surfaceTime": "0.04989999999999782",
+        "ready": "true",
+        "submitMs": "0.8999996185302734",
+        "triangles": "12672",
+        "calls": "1",
+        "poolViews": "1",
+        "poolGeometries": "1",
+        "poolTextures": "2",
+        "poolPrograms": "1",
+        "historyTime": "0"
+      },
+      {
+        "contexts": 2,
+        "created": 2,
+        "max": 2,
+        "studyVisual": "",
+        "motif": "afterimage",
+        "renderer": "webgl",
+        "audioReactive": "false",
+        "running": "true",
+        "frames": "4",
+        "elapsed": "0.05",
+        "audioEnergy": "0",
+        "surfaceTime": "0.05",
+        "ready": "true",
+        "submitMs": "1.3000001907348633",
+        "triangles": "26752",
+        "calls": "3",
+        "poolViews": "1",
+        "poolGeometries": "3",
+        "poolTextures": "2",
+        "poolPrograms": "2",
+        "historyTime": "0"
+      },
+      {
+        "contexts": 2,
+        "created": 2,
+        "max": 2,
+        "studyVisual": "",
+        "motif": "form",
+        "renderer": "webgl",
+        "audioReactive": "false",
+        "running": "true",
+        "frames": "3",
+        "elapsed": "0",
+        "audioEnergy": "0",
+        "surfaceTime": "0",
+        "ready": "true",
+        "submitMs": "60.69999980926514",
+        "triangles": "12672",
+        "calls": "1",
+        "poolViews": "1",
+        "poolGeometries": "1",
+        "poolTextures": "2",
+        "poolPrograms": "1",
+        "historyTime": "0"
+      }
+    ],
+    "hero": {
+      "renderer": "webgl",
+      "material": "shader",
+      "webgl": true,
+      "phases": [
+        0.7506050246091385,
+        2.399627008403521
+      ]
+    },
+    "afterimage": {
+      "time": 2.7814999999999985,
+      "history": 2.2314999999999987,
+      "calls": "3"
+    },
+    "echo": {
+      "signal1": 0.4628533333333345,
+      "signal2": 1.4619644444444437,
+      "audioSync": 1.095185185185185
+    },
+    "process": {
+      "differentStates": true,
+      "rapidSelection": true
+    },
+    "maxContexts": 2
+  },
+  "access": {
+    "pageContrast": {
+      "checked": 78,
+      "minRatio": 8.105752593630175,
+      "minSize": 12,
+      "issues": []
+    },
+    "formContrast": {
+      "checked": 17,
+      "minRatio": 7.251823567460518,
+      "minSize": 12,
+      "issues": []
+    },
+    "mobileProjectMenu": true,
+    "playerFocusVisible": true,
+    "reflow": {
+      "width": 607,
+      "scroll": 607,
+      "close": 12.800000190734863,
+      "copyBottom": 351.1999969482422,
+      "height": 360
+    }
+  },
+  "phase5-checks": {
+    "viewports": [
+      {
+        "width": 1440,
+        "height": 900,
+        "client": 1425,
+        "scroll": 1425,
+        "heroTitle": 712.3999862670898,
+        "ctaBottom": 794.9875144958496,
+        "brief": {
+          "client": 658,
+          "scroll": 658,
+          "closeTop": 86.80000305175781,
+          "actionsBottom": 829.2000122070312,
+          "height": 900
+        }
+      },
+      {
+        "width": 1280,
+        "height": 720,
+        "client": 1265,
+        "scroll": 1265,
+        "heroTitle": 632.3875007629395,
+        "ctaBottom": 689.7875022888184,
+        "brief": {
+          "client": 658,
+          "scroll": 658,
+          "closeTop": 32.79999923706055,
+          "actionsBottom": 703.2000122070312,
+          "height": 720
+        }
+      },
+      {
+        "width": 768,
+        "height": 1024,
+        "client": 753,
+        "scroll": 753,
+        "heroTitle": 376.38750076293945,
+        "ctaBottom": 585.0249900817871,
+        "brief": {
+          "client": 658,
+          "scroll": 658,
+          "closeTop": 148.8000030517578,
+          "actionsBottom": 891.2000122070312,
+          "height": 1024
+        }
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "client": 375,
+        "scroll": 375,
+        "heroTitle": 351.20001220703125,
+        "ctaBottom": 511.93749618530273,
+        "brief": {
+          "client": 358,
+          "scroll": 358,
+          "closeTop": 52.79999923706055,
+          "actionsBottom": 801.2000122070312,
+          "height": 844
+        }
+      },
+      {
+        "width": 320,
+        "height": 568,
+        "client": 305,
+        "scroll": 305,
+        "heroTitle": 284.8000183105469,
+        "ctaBottom": 555.6750106811523,
+        "brief": {
+          "client": 287,
+          "scroll": 287,
+          "closeTop": 18.80000114440918,
+          "actionsBottom": 559.1999969482422,
+          "height": 568
+        }
+      }
+    ],
+    "clipboard": [
+      1440,
+      1280,
+      768,
+      390,
+      320
+    ],
+    "errors": [],
+    "footerAnchors": true,
+    "denied": {
+      "focused": true,
+      "start": 0,
+      "end": 158,
+      "length": 158
+    },
+    "absent": {
+      "focused": true,
+      "start": 0,
+      "end": 158,
+      "length": 158
+    },
+    "briefWithoutWebGL": true
+  },
+  "review-checks": {
+    "layouts": [
+      {
+        "font": "native",
+        "width": 320,
+        "height": 568,
+        "client": 305,
+        "scroll": 305,
+        "titleRight": 222.96250915527344,
+        "contexts": "0"
+      },
+      {
+        "font": "native",
+        "width": 390,
+        "height": 844,
+        "client": 375,
+        "scroll": 375,
+        "titleRight": 273.8125,
+        "contexts": "0"
+      },
+      {
+        "font": "native",
+        "width": 768,
+        "height": 1024,
+        "client": 753,
+        "scroll": 753,
+        "titleRight": 555.4500122070312,
+        "contexts": "0"
+      },
+      {
+        "font": "native",
+        "width": 1280,
+        "height": 720,
+        "client": 1265,
+        "scroll": 1265,
+        "titleRight": 863.1249847412109,
+        "contexts": "0"
+      },
+      {
+        "font": "native",
+        "width": 1440,
+        "height": 900,
+        "client": 1425,
+        "scroll": 1425,
+        "titleRight": 968.4500122070312,
+        "contexts": "0"
+      },
+      {
+        "font": "Arial",
+        "width": 320,
+        "height": 568,
+        "client": 305,
+        "scroll": 305,
+        "titleRight": 286.6625061035156,
+        "contexts": "0"
+      },
+      {
+        "font": "Arial",
+        "width": 390,
+        "height": 844,
+        "client": 375,
+        "scroll": 375,
+        "titleRight": 352.2250061035156,
+        "contexts": "0"
+      },
+      {
+        "font": "Arial",
+        "width": 768,
+        "height": 1024,
+        "client": 753,
+        "scroll": 753,
+        "titleRight": 607.8250122070312,
+        "contexts": "0"
+      },
+      {
+        "font": "Arial",
+        "width": 1280,
+        "height": 720,
+        "client": 1265,
+        "scroll": 1265,
+        "titleRight": 930.4125061035156,
+        "contexts": "0"
+      },
+      {
+        "font": "Arial",
+        "width": 1440,
+        "height": 900,
+        "client": 1425,
+        "scroll": 1425,
+        "titleRight": 1044.2500305175781,
+        "contexts": "0"
+      }
+    ],
+    "errors": [],
+    "focus": {
+      "headerReturn": true,
+      "nextTabMenu": true,
+      "studyReturn": {
+        "focused": true,
+        "top": 409.88751220703125,
+        "bottom": 457.88751220703125,
+        "height": 844
+      },
+      "state": "off"
+    },
+    "labels": [
+      "Visual preview",
+      "Following sound",
+      "Static visual",
+      "Following sound",
+      "Visual preview"
+    ],
+    "pendingMessages": [
+      "Enabling sound?",
+      "Starting FORM?"
+    ]
+  },
+  "audio-edge-checks": [
+    {
+      "mode": "delayed-resume",
+      "audioDebug": "",
+      "contexts": "1",
+      "voices": "0",
+      "maxVoices": "1",
+      "nodes": "4",
+      "state": "stopped",
+      "active": "",
+      "last": "phase",
+      "reason": "manual",
+      "enabled": "true",
+      "volume": "0.2",
+      "energy": "{\"playing\":false,\"study\":null,\"bass\":0,\"mid\":0,\"high\":0,\"level\":0,\"rms\":0,\"peak\":0,\"elapsed\":0,\"progress\":0}",
+      "maxPeak": "0.018984755501151085"
+    },
+    {
+      "mode": "reject-resume",
+      "audioDebug": "",
+      "contexts": "1",
+      "voices": "0",
+      "maxVoices": "1",
+      "nodes": "4",
+      "state": "stopped",
+      "active": "",
+      "last": "phase",
+      "reason": "manual",
+      "enabled": "true",
+      "volume": "0.2",
+      "energy": "{\"playing\":false,\"study\":null,\"bass\":0,\"mid\":0,\"high\":0,\"level\":0,\"rms\":0,\"peak\":0,\"elapsed\":0,\"progress\":0}",
+      "maxPeak": "0.018984755501151085"
+    },
+    {
+      "mode": "unsupported",
+      "audioDebug": "",
+      "contexts": "0",
+      "voices": "0",
+      "maxVoices": "0",
+      "nodes": "0",
+      "state": "off",
+      "active": "",
+      "last": "",
+      "reason": "",
+      "enabled": "false",
+      "volume": "0.2",
+      "energy": "{\"playing\":false,\"study\":null,\"bass\":0,\"mid\":0,\"high\":0,\"level\":0,\"rms\":0,\"peak\":0,\"elapsed\":0,\"progress\":0}",
+      "maxPeak": "0"
+    },
+    {
+      "mode": "no-webgl",
+      "audioDebug": "",
+      "contexts": "1",
+      "voices": "0",
+      "maxVoices": "1",
+      "nodes": "4",
+      "state": "stopped",
+      "active": "",
+      "last": "phase",
+      "reason": "manual",
+      "enabled": "true",
+      "volume": "0.2",
+      "energy": "{\"playing\":false,\"study\":null,\"bass\":0,\"mid\":0,\"high\":0,\"level\":0,\"rms\":0,\"peak\":0,\"elapsed\":0,\"progress\":0}",
+      "maxPeak": "0.018984755501151085"
+    }
+  ],
+  "audio-signal-checks": [
+    {
+      "id": "phase",
+      "stop": false,
+      "duration": 4,
+      "peak": 0.09827539324760437,
+      "rms": 0.016388753771803505,
+      "zeroCrossingsPerSecond": 256.9767441860465,
+      "tailPeak": 0,
+      "nodes": 10
+    },
+    {
+      "id": "phase",
+      "stop": true,
+      "duration": 4,
+      "peak": 0.09492377191781998,
+      "rms": 0.010262652433628543,
+      "zeroCrossingsPerSecond": 31.86046511627907,
+      "tailPeak": 0,
+      "nodes": 10
+    },
+    {
+      "id": "form",
+      "stop": false,
+      "duration": 8,
+      "peak": 0.09827539324760437,
+      "rms": 0.01570897461080001,
+      "zeroCrossingsPerSecond": 409.5180722891566,
+      "tailPeak": 0,
+      "nodes": 16
+    },
+    {
+      "id": "form",
+      "stop": true,
+      "duration": 8,
+      "peak": 0.09492377191781998,
+      "rms": 0.0073867645690636734,
+      "zeroCrossingsPerSecond": 16.50602409638554,
+      "tailPeak": 0,
+      "nodes": 16
+    },
+    {
+      "id": "echo",
+      "stop": false,
+      "duration": 9,
+      "peak": 0.1779894232749939,
+      "rms": 0.00723119988373366,
+      "zeroCrossingsPerSecond": 656.5591397849462,
+      "tailPeak": 0,
+      "nodes": 58
+    },
+    {
+      "id": "echo",
+      "stop": true,
+      "duration": 9,
+      "peak": 0.09317335486412048,
+      "rms": 0.0025539262255650113,
+      "zeroCrossingsPerSecond": 71.18279569892472,
+      "tailPeak": 0,
+      "nodes": 58
+    },
+    {
+      "id": "afterimage",
+      "stop": false,
+      "duration": 12,
+      "peak": 0.08506794273853302,
+      "rms": 0.01349659826406416,
+      "zeroCrossingsPerSecond": 366.8292682926829,
+      "tailPeak": 0,
+      "nodes": 26
+    },
+    {
+      "id": "afterimage",
+      "stop": true,
+      "duration": 12,
+      "peak": 0.08500377833843231,
+      "rms": 0.009175702316893818,
+      "zeroCrossingsPerSecond": 49.512195121951216,
+      "tailPeak": 0,
+      "nodes": 26
+    }
+  ],
+  "rework-audio-checks": [
+    {
+      "name": "FORM",
+      "clockError": 0,
+      "finished": true,
+      "framesFrozen": true,
+      "contexts": "1",
+      "voices": "0"
+    },
+    {
+      "name": "AFTERIMAGE",
+      "clockError": 0.018666666666666387,
+      "finished": true,
+      "framesFrozen": true,
+      "contexts": "1",
+      "voices": "0"
+    }
+  ],
+  "audio-endings-checks": [
+    {
+      "id": "PHASE",
+      "seconds": 4,
+      "wallMilliseconds": 5453,
+      "maxOutputPeak": 0.019655078649520874,
+      "voices": "0",
+      "nodes": "4",
+      "progress": 4
+    },
+    {
+      "id": "FORM",
+      "seconds": 8,
+      "wallMilliseconds": 8260,
+      "maxOutputPeak": 0.019660018384456635,
+      "voices": "0",
+      "nodes": "4",
+      "progress": 8
+    },
+    {
+      "id": "ECHO",
+      "seconds": 9,
+      "wallMilliseconds": 9189,
+      "maxOutputPeak": 0.019660018384456635,
+      "voices": "0",
+      "nodes": "4",
+      "progress": 9
+    },
+    {
+      "id": "AFTERIMAGE",
+      "seconds": 12,
+      "wallMilliseconds": 12294,
+      "maxOutputPeak": 0.019660018384456635,
+      "voices": "0",
+      "nodes": "4",
+      "progress": 12
+    }
+  ],
+  "audio-load-checks": {
+    "viewport": "1440x900 DPR1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "idle": {
+      "p50": 16.699999999999818,
+      "p95": 17,
+      "max": 32.90000000000009,
+      "longTasks": [],
+      "maxEnergy": 0,
+      "maxTension": 0,
+      "maxTwist": 0,
+      "maxShine": 1
+    },
+    "playing": {
+      "p50": 16.699999999999818,
+      "p95": 16.899999999999636,
+      "max": 17,
+      "longTasks": [],
+      "maxEnergy": 0.18503932267016562,
+      "maxTension": 0.042056123854752964,
+      "maxTwist": 0.015333655302851487,
+      "maxShine": 1.0000009707893391
+    },
+    "cycles": 15,
+    "final": {
+      "contexts": "1",
+      "nodes": "4",
+      "maxVoices": "1"
+    },
+    "renderer": {
+      "geometries": "1",
+      "textures": "2",
+      "programs": "1",
+      "triangles": "10240",
+      "calls": "1"
+    }
+  },
+  "phase5-performance-checks": [
+    {
+      "width": 1440,
+      "height": 900,
+      "devicePixelRatio": 1,
+      "startup": {
+        "readyAt": 881.7000002861023,
+        "longTasks": [
+          {
+            "start": 114.40000009536743,
+            "duration": 65
+          },
+          {
+            "start": 452.5,
+            "duration": 310
+          },
+          {
+            "start": 763.0999999046326,
+            "duration": 105
+          }
+        ],
+        "renderer": "ANGLE (Intel, Intel(R) UHD Graphics 620 (0x00003EA0) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "gpuTimerAvailable": true,
+        "buffer": [
+          663,
+          621
+        ],
+        "cssCanvas": [
+          663,
+          621
+        ]
+      },
+      "warm": {
+        "duration": 2007.0999999046326,
+        "p50": 16.600000000000364,
+        "p95": 17,
+        "max": 17.199999999999818,
+        "longTasks": [],
+        "renderedFrames": 121
+      },
+      "gpu": {
+        "available": true,
+        "disjoint": false,
+        "completed": 60,
+        "p50": 2.210741,
+        "p95": 2.272574,
+        "max": 6.060309
+      },
+      "dormant": {
+        "before": 260,
+        "after": 260,
+        "vectorsRunning": false
+      },
+      "paused": {
+        "before": "268",
+        "after": "268"
+      },
+      "hiddenReturn": true,
+      "resources": {
+        "geometries": "1",
+        "textures": "2",
+        "programs": "1",
+        "calls": "1",
+        "triangles": "10240"
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "devicePixelRatio": 3,
+      "startup": {
+        "readyAt": 794.6999998092651,
+        "longTasks": [
+          {
+            "start": 100.40000009536743,
+            "duration": 58
+          },
+          {
+            "start": 424.40000009536743,
+            "duration": 245
+          },
+          {
+            "start": 669.6999998092651,
+            "duration": 108
+          }
+        ],
+        "renderer": "ANGLE (Intel, Intel(R) UHD Graphics 620 (0x00003EA0) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "gpuTimerAvailable": true,
+        "buffer": [
+          457,
+          429
+        ],
+        "cssCanvas": [
+          366,
+          344
+        ]
+      },
+      "warm": {
+        "duration": 2026.6000003814697,
+        "p50": 16.600000000000364,
+        "p95": 17,
+        "max": 33.299999999999955,
+        "longTasks": [],
+        "renderedFrames": 121
+      },
+      "gpu": {
+        "available": true,
+        "disjoint": false,
+        "completed": 60,
+        "p50": 1.109162,
+        "p95": 1.129662,
+        "max": 1.149245
+      },
+      "dormant": {
+        "before": 270,
+        "after": 270,
+        "vectorsRunning": false
+      },
+      "paused": {
+        "before": "277",
+        "after": "277"
+      },
+      "hiddenReturn": true,
+      "resources": {
+        "geometries": "1",
+        "textures": "2",
+        "programs": "1",
+        "calls": "1",
+        "triangles": "5376"
+      }
+    }
+  ],
+  "rework-fallback-checks": [
+    {
+      "mode": "shader",
+      "renderer": "fallback",
+      "failure": "shader-compile",
+      "svg": "visible",
+      "canvas": "hidden",
+      "htmlAndAudio": true
+    },
+    {
+      "mode": "context",
+      "renderer": "fallback",
+      "failure": "context-lost",
+      "svg": "visible",
+      "canvas": "hidden",
+      "htmlAndAudio": true
+    }
+  ],
+  "rework-page-captures": [
+    {
+      "width": 1440,
+      "height": 900,
+      "renderers": [
+        "webgl",
+        "svg",
+        "webgl"
+      ]
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "renderers": [
+        "webgl",
+        "svg",
+        "webgl"
+      ]
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "renderers": [
+        "webgl",
+        "svg",
+        "webgl"
+      ]
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "renderers": [
+        "webgl",
+        "svg",
+        "webgl"
+      ]
+    }
+  ]
+}

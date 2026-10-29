@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+﻿import { useEffect, useRef, useState } from 'react'
 import type { RefObject } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import { Group } from 'three'
@@ -21,7 +21,7 @@ function LoopSurface({ motion, active, host, shaderFallback, compact, pivot, con
   // cleanup releases resources, so a disposed geometry cannot be drawn again
   // between a resize effect cleanup and a later setState commit.
   const [resources] = useState(() => {
-    const geometry = createLoopGeometry(compact ? 144 : 208, compact ? 40 : 56)
+    const geometry = createLoopGeometry(compact ? 112 : 160, compact ? 24 : 32)
     const uniforms = createLoopUniforms()
     return { geometry, uniforms, material: createChromeMaterial(uniforms, !shaderFallback) }
   })
@@ -49,7 +49,9 @@ function LoopSurface({ motion, active, host, shaderFallback, compact, pivot, con
     pivot.current.quaternion.copy(controller.orientation)
     pivot.current.position.set(0, pose.lift, pose.retreat)
     pivot.current.scale.setScalar(pose.scale)
-    resources.uniforms.uBreath.value = pose.breath
+    resources.uniforms.uPhase.value = pose.phase
+    resources.uniforms.uWave.value = pose.wave
+    resources.uniforms.uTension.value = pose.tension
     resources.uniforms.uTwist.value = pose.twist
     resources.material.envMapIntensity = pose.shine
     if (motion && active) state.invalidate()
@@ -87,3 +89,4 @@ export function PhaseSculpture(props: Props) {
     </group>
   )
 }
+

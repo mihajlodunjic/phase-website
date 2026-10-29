@@ -1,4 +1,5 @@
-﻿import { AUDIO_STUDIES, tonesFor } from './studies'
+﻿import { ECHO_EVENTS } from './events'
+import { AUDIO_STUDIES, tonesFor } from './studies'
 import type { AudioId } from './types'
 import { rampParameter } from './audioGraph'
 
@@ -71,7 +72,7 @@ export function createSynthVoice(context: BaseAudioContext, id: AudioId, started
     generator.connect(filter).connect(gain).connect(instrument)
     generator.start(start); generator.stop(end)
   }
-  if (id === 'echo') [0.18, 1.08, 1.98, 3.08, 4.18, 5.38, 6.58, 7.68].forEach(at => noise(at, 0.04, 0.025, 4300))
+  if (id === 'echo') ECHO_EVENTS.forEach(event => noise(event.at - 0.02, 0.04, 0.025, 4300))
   if (id === 'afterimage') noise(0.1, 10.7, 0.018, 1200, true)
   // Silent scheduled completion includes the delay tail and runs on audio time.
   const completion = source(context.createConstantSource()); completion.offset.value = 0
@@ -93,3 +94,4 @@ export function createSynthVoice(context: BaseAudioContext, id: AudioId, started
     },
   }
 }
+

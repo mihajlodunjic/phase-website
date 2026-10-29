@@ -69,3 +69,7 @@
   .hero-description { font-size: 16px; }
   .phase-visual { height: 290px; }
 }
+@keyframes phase-intro { from { transform: translateY(14px); opacity: 1; } to { transform: translateY(0); opacity: 1; } }
+#top[data-intro='on'][data-motion='on'] .hero-copy { animation: phase-intro 850ms both; }
+#top[data-intro='on'][data-motion='on'] .hero-art { animation: phase-intro 1100ms both; }
+#top[data-motion='off'] .hero-copy, #top[data-motion='off'] .hero-art { animation: none; }

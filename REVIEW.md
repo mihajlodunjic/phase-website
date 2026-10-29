@@ -87,3 +87,17 @@ zoom/pinch, real OS tab/BFCache lifecycle, other installed system fonts or
 subjective audio listening. Arial was a deliberate fallback simulation, not a
 claim to have tested another operating system. Prior touch evidence remains in
 QA.md; this review repeats mobile viewport and touch-emulated performance paths.
+
+## Animation rework follow-up ? 2026-10-29
+
+The later user brief explicitly supersedes the former subtle motion direction.
+The prior UI findings/fixes above remain historical evidence. New motion work
+replaces hero geometry/deformation/light, FORM's collapsing scale, static
+AFTERIMAGE bands, ECHO's blinking-only nodes and the repeated Approach motif.
+Native WebGL2 was confirmed locally; fallback was not mistaken for 3D output.
+
+ANIMATION_REWORK.md records current behavior, before/after images, silent local
+clips, four required viewport inspections and measured workload. QA.md has the
+latest regression/performance appendix. 52 tests, typecheck/build and relevant
+browser fixtures passed. Startup shader compilation, the large shared Three
+chunk and untested physical phones/Safari remain explicit limits. No publication.

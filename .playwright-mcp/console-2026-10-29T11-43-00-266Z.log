@@ -1,0 +1,63 @@
+[     476ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:15557
+[    1509ms] [WARNING] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://127.0.0.1:5173/@vite/client:367
+[  186660ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:15557
+[  187140ms] [WARNING] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://127.0.0.1:5173/@vite/client:367
+[  591735ms] Error: AudioProvider is required
+    at useAudio (http://127.0.0.1:5173/src/audio/AudioProvider.tsx?t=1793269020927:26:21)
+    at App (http://127.0.0.1:5173/src/app/App.tsx?t=1793274354145:19:21)
+    at Object.react_stack_bottom_frame (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:13895:12)
+    at renderWithHooks (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:4153:19)
+    at updateFunctionComponent (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:5528:16)
+    at beginWork (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:6144:20)
+    at runWithFiberInDEV (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:697:66)
+    at performUnitOfWork (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8901:92)
+    at workLoopSync (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8797:37)
+    at renderRootSync (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8781:6)
+[  591735ms] [WARNING] %s
+
+%s
+ An error occurred in the <App> component. Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries. @ http://127.0.0.1:5173/@vite/client:367
+[  591784ms] Error: AudioProvider is required
+    at useAudio (http://127.0.0.1:5173/src/audio/AudioProvider.tsx?t=1793269020927:26:21)
+    at App (http://127.0.0.1:5173/src/app/App.tsx?t=1793274354145:19:21)
+    at Object.react_stack_bottom_frame (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:13895:12)
+    at renderWithHooks (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:4153:19)
+    at updateFunctionComponent (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:5528:16)
+    at beginWork (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:6144:20)
+    at runWithFiberInDEV (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:697:66)
+    at performUnitOfWork (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8901:92)
+    at workLoopSync (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8797:37)
+    at renderRootSync (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8781:6)
+[  591784ms] [WARNING] %s
+
+%s
+ An error occurred in the <App> component. Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries. @ http://127.0.0.1:5173/@vite/client:367
+[  592202ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:15557
+[  592748ms] [WARNING] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://127.0.0.1:5173/@vite/client:367
+[  781958ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:15557
+[  782941ms] [WARNING] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://127.0.0.1:5173/@vite/client:367
+[  867407ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:15557
+[  868327ms] [WARNING] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://127.0.0.1:5173/@vite/client:367
+[ 1792064ms] [WARNING] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://127.0.0.1:5173/@vite/client:367
+[ 2644445ms] [WARNING] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://127.0.0.1:5173/@vite/client:367
+[ 3891246ms] Error: AudioProvider is required
+    at useAudio (http://127.0.0.1:5173/src/audio/AudioProvider.tsx?t=1793274771879:26:21)
+    at App (http://127.0.0.1:5173/src/app/App.tsx?t=1793276822919:23:21)
+    at Object.react_stack_bottom_frame (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:13895:12)
+    at renderWithHooks (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:4153:19)
+    at updateFunctionComponent (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:5528:16)
+    at beginWork (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:6144:20)
+    at runWithFiberInDEV (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:697:66)
+    at performUnitOfWork (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8901:92)
+    at workLoopSync (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8797:37)
+    at renderRootSync (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8781:6)
+[ 3891236ms] [WARNING] %s
+
+%s
+ An error occurred in the <App> component. Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries. @ http://127.0.0.1:5173/@vite/client:367
+[ 3891700ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:15557
+[ 3892242ms] [WARNING] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://127.0.0.1:5173/@vite/client:367
+[ 5357640ms] [WARNING] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://127.0.0.1:4173/assets/studioEnvironment-D99OCcs8.js:0

@@ -1,32 +1,22 @@
-import { BufferGeometry, Float32BufferAttribute } from 'three'
+﻿import { BufferGeometry, Float32BufferAttribute } from 'three'
+import { sampleResonance } from './resonanceSurface'
 
 const TAU = Math.PI * 2
 
 /** A swept, asymmetric loop. The cross-section rolls around a non-planar spine.
  * Flattened sections turn through a full revolution; broad, shallow folds replace ribbing.
  */
-export function createLoopGeometry(segments = 208, sides = 56) {
+export function createLoopGeometry(segments = 160, sides = 32) {
   const positions: number[] = []
   const indices: number[] = []
   const uvs: number[] = []
   for (let i = 0; i <= segments; i++) {
     const u = i / segments * TAU
-    const radial = 1.43 + 0.1 * Math.cos(2 * u - 0.4) + 0.055 * Math.sin(3 * u)
-    const width = 0.49 + 0.105 * Math.cos(u + 0.7) + 0.035 * Math.sin(3 * u)
-    const thickness = 0.245 + 0.06 * Math.sin(u - 0.5)
-    const twist = u + 0.3 * Math.sin(2 * u + 0.3) + 0.45
+    const point = [0, 0, 0]
     for (let j = 0; j <= sides; j++) {
       const v = j / sides * TAU
-      const fold = 1 + 0.025 * Math.cos(v * 4 + u * 3)
-      const a = Math.cos(v) * width * (1 + 0.12 * Math.sin(v) ** 2) * fold
-      const b = Math.sin(v) * thickness * (1 + 0.22 * Math.cos(v) ** 2) * fold
-      const outward = a * Math.cos(twist) - b * Math.sin(twist)
-      const depth = a * Math.sin(twist) + b * Math.cos(twist)
-      positions.push(
-        ((radial + outward) * Math.cos(u) + 0.12 * Math.sin(2 * u)) * 1.04,
-        ((radial + outward) * Math.sin(u) + 0.08 * Math.cos(2 * u)) * 1.08,
-        0.25 * Math.sin(2 * u - 0.7) + 0.12 * Math.cos(u) + depth,
-      )
+      sampleResonance(u, v, 0, 0, 0, 0, point)
+      positions.push(point[0], point[1], point[2])
       uvs.push(i / segments, j / sides)
       if (i < segments && j < sides) {
         const aIndex = i * (sides + 1) + j
@@ -68,6 +58,7 @@ export function createLoopGeometry(segments = 208, sides = 56) {
   for (let j = 0; j <= sides; j++) averageTangent(j, segments * (sides + 1) + j)
   geometry.computeBoundingSphere()
   // Conservative allowance for the bounded shader spread and y-axis twist.
-  geometry.boundingSphere!.radius *= 1.04
+  geometry.boundingSphere!.radius *= 1.22
   return geometry
 }
+

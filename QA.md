@@ -520,3 +520,77 @@ GPU mesh draw p50 ~3.68 / 1.78 ms, bez warm long tasks. Startup long task do
 RAF ritam u odnosu na ranije ne pripisuje UI ispravkama. 60 fps nije potvrđeno.
 Fizički uređaji, Safari/screen reader, real OS lifecycle i slušanje ostaju
 neprovereni; opseg, resursi, backend i dokazi navedeni su u `REVIEW.md`.
+
+## Animation rework ? 2026-10-29 (current motion brief)
+
+This section supersedes the historical 18 s / tiny-amplitude motion results above.
+Full change/evidence index: ANIMATION_REWORK.md. Native WebGL2 was available:
+Chrome 155 / Windows 10 / ANGLE Intel UHD 620 / D3D11. The actual shader renderer
+was inspected; SVG fallback was tested separately with intentional failures.
+
+Completed checks:
+
+- Typecheck, build and 52 unit tests in 11 files passed. No dependencies added.
+- scene, studies, audio, audio-edge, audio-endings, audio-load, audio-signal,
+  phase5, phase5-access, phase5-performance and review browser fixtures passed.
+- rework-checks: real WebGL, different hero/surface instants, no FORM collapse,
+  AFTERIMAGE history, ECHO travel/audio arrivals, continuous Approach states,
+  ten tab cycles with only two total GL contexts, four required layouts.
+- rework-audio-checks: FORM/AFTERIMAGE full playback, clock error 0 / 18.7 ms at
+  sampled instant, natural end frozen, one context / zero voices after end.
+- rework-fallback-checks: injected shader error and native context loss both
+  exposed SVG + failure reason; HTML panel selection and real audio still worked.
+- rework-performance-checks, rework-gpu-checks and rework-page-captures passed.
+  Actual initialized 3D captures at 1440?900 / 1280?720 / 390?844 / 320?568.
+  Motion-off/reduced motion, pointer/replay, menu/focus/brief, short panel scrolling
+  and no-WebGL behavior covered. Additional 768?1024 / 640?360 reflow regressions.
+- Actual clipboard read-back and missing/denied clipboard fallback passed at
+  1440/1280/768/390/320. DOM contrast sample min 8.11:1 page / 7.25:1 form.
+- All four scores ended at 4/8/9/12 s, zero voice/energy, four shared nodes,
+  one AudioContext. Fifteen start/stop cycles stable. Offline peak < .18, no
+  clipping/non-finite samples, silent tail including scheduled mid-phrase fades.
+
+### Latest measurements
+
+Production preview on 4173, no CPU/network throttle. Same desktop GPU for both
+sizes; phone emulation is not a physical phone. Warming/browser caches apply.
+
+| Sample | 1440?900 DPR1 | 390?844 DPR3 emulation |
+| --- | ---: | ---: |
+| Hero ready from navigation | ~882 ms | ~795 ms |
+| Longest startup long task | 310 ms | 245 ms |
+| Warm RAF p50 / p95 / max | 16.6 / 17.0 / 17.2 ms | 16.6 / 17.0 / 33.3 ms |
+| Hero mesh GPU p50 / p95 | 2.21 / 2.27 ms | 1.11 / 1.13 ms |
+| Hero triangles / calls | 10,240 / 1 | 5,376 / 1 |
+| AFTERIMAGE GPU sum p50 / p95 | 3.09 / 3.13 ms | 1.76 / 1.78 ms |
+| FORM CPU submit/copy p95 | 1.2 ms | 1.2 ms |
+| AFTERIMAGE CPU submit/copy p95 | 1.4 ms | 1.3 ms |
+
+GPU timers: EXT_disjoint_timer_query_webgl2, 60 completed hero queries;
+AFTERIMAGE 180 queries grouped into 60 complete three-draw updates; disjoint=false.
+Queries exclude canvas presentation, full JS/frame and compositing. CPU
+submit/copy means API wall time, not completed GPU work. Instrumented study
+fixture sampled ~30 visual updates/s and RAF p95 ~26 ms. No warm long tasks
+in these samples. These different fixtures do not prove a universal FPS target.
+
+Hero modal frames 260?260 / 270?270; motion-off 268?268 / 277?277. Resources
+1 geometry / 2 textures / 1 program. Study pool uses one instanced surface draw
+FORM, or surface + two history draws AFTERIMAGE, stable resources across cycles.
+Pool remains owned by page to avoid new contexts per selection. Some first
+material draws on tab switch still measured ~57?63 ms compilation/submission;
+startup shader work and bundle weight remain limits. Resource counters do not
+measure exact GPU memory or native GC.
+
+Main JS 274.37 kB / 86.04 gzip; Scene 184.54 / 59.19; shared Three/environment
+737.21 / 187.03; study renderer 9.40 / 3.90; CSS 27.85 / 6.24. Vite large-chunk
+warning remains. Shared chunks are not counted twice when describing loading.
+
+Before/after screenshots and three browser-native, silent WebM clips live in
+artifacts/qa/ (index in ANIMATION_REWORK.md). Native capture avoided missing
+Playwright FFmpeg without downloads. Clips decoded with non-empty image data.
+They are QA artifacts, not website media/assets.
+
+Remaining: physical iOS/Android, Safari, assistive technology, real zoom/pinch,
+OS-level lifecycle and subjective listening. Visibility/interruption/BFCache
+are event simulations. No WCAG or physical-mobile/60fps claim. Remote reference
+could not be fetched; local real render was used. All work remains local.

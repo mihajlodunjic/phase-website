@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { Vector3 } from 'three'
 import { createLoopGeometry } from './loopGeometry'
 
-describe.each([[208, 56], [144, 40]])('loop geometry %i × %i', (segments, sides) => {
+describe.each([[160, 32], [112, 24]])('loop geometry %i × %i', (segments, sides) => {
   it('closes both seams without a position or shading crack', () => {
     const geometry = createLoopGeometry(segments, sides)
     const positions = geometry.getAttribute('position')
@@ -51,7 +51,7 @@ describe.each([[208, 56], [144, 40]])('loop geometry %i × %i', (segments, sides
     const point = new Vector3()
     let farthest = 0
     for (let i = 0; i < positions.count; i++) farthest = Math.max(farthest, point.fromBufferAttribute(positions, i).distanceTo(sphere.center))
-    expect(sphere.radius).toBeGreaterThanOrEqual(farthest * 1.039)
+    expect(sphere.radius).toBeGreaterThanOrEqual(farthest * 1.21)
     geometry.dispose()
   })
 })

@@ -49,6 +49,8 @@ export class AudioEngine {
     this.snapshot = { supported: Boolean(options.createContext || native), enabled: false, status: 'off', activeId: null, lastId: null, volume: 0.2, position: 0, reason: null, error: null }
   }
 
+  /** Native audio time, read-only: querying it never creates/resumes a context. */
+  getPlayheadTime = () => this.voice && this.context ? clampAudio(this.context.currentTime-this.voice.startedAt,0,this.voice.duration) : this.snapshot.position
   getSnapshot = () => this.snapshot
   subscribe = (listener: () => void) => { this.listeners.add(listener); return () => { this.listeners.delete(listener) } }
   subscribeMeter = (listener: () => void) => { this.meterListeners.add(listener); listener(); return () => { this.meterListeners.delete(listener) } }
@@ -203,7 +205,7 @@ export class AudioEngine {
     const voice = this.voice
     if (!voice || !this.context || !this.graph || this.snapshot.status !== 'playing') return
     if (now - this.lastMeter >= 1000 / 30) {
-      this.lastMeter = now
+      this.lastMeter += Math.floor((now-this.lastMeter+0.01)/(1000/30))*(1000/30)
       this.graph.analyser.getFloatFrequencyData(this.frequencies)
       this.graph.analyser.getFloatTimeDomainData(this.waveform)
       readSpectrum(this.frequencies, this.waveform, this.context.sampleRate, this.graph.analyser.fftSize, this.energy)

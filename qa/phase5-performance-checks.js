@@ -55,7 +55,7 @@ async (page) => {
         for (let i = 0; i < 10; i++) await new Promise(requestAnimationFrame)
         const before = Number(document.querySelector('.phase-visual').dataset.frames)
         for (let i = 0; i < 30; i++) await new Promise(requestAnimationFrame)
-        return { before, after: Number(document.querySelector('.phase-visual').dataset.frames), vectorsRunning: [...document.querySelectorAll('.study-entry svg.study-visual')].some(el => el.dataset.running === 'true') }
+        return { before, after: Number(document.querySelector('.phase-visual').dataset.frames), vectorsRunning: [...document.querySelectorAll('.study-entry [data-study-visual]')].some(el => el.dataset.running === 'true') }
       })
       if (dormant.before !== dormant.after || dormant.vectorsRunning) throw new Error('Modal background did not rest')
       await test.keyboard.press('Escape')

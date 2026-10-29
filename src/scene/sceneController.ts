@@ -1,89 +1,55 @@
-import { Euler, Quaternion } from 'three'
+﻿import { Euler, Quaternion } from 'three'
 import type { AudioEnergy } from '../audio/types'
 
-export const MAX_TILT = 7 * Math.PI / 180
-export const IDLE_PERIOD = 18
-export const MAX_BREATH = 0.009
-export const MAX_TWIST = 0.018
+export const MAX_TILT = 12 * Math.PI / 180
+export const IDLE_PERIOD = 16
+export const WAVE_PERIOD = 8
+export const MAX_TENSION = 0.5
+export const MAX_TWIST = 0.32
 const TAU = Math.PI * 2
-
 export const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, Number.isFinite(value) ? value : 0))
 export type SceneInputs = { pointerX: number; pointerY: number; scroll: number; audio?: AudioEnergy }
-export type ScenePose = { x: number; y: number; z: number; lift: number; retreat: number; scale: number; breath: number; twist: number; shine: number }
+export type ScenePose = { x: number; y: number; z: number; lift: number; retreat: number; scale: number; phase: number; wave: number; tension: number; twist: number; shine: number }
 export type SceneOptions = { motion: boolean; active: boolean; compact: boolean }
-
-export const neutralPose = (): ScenePose => ({ x: 0, y: 0, z: 0, lift: 0, retreat: 0, scale: 1, breath: 0, twist: 0, shine: 1 })
-
-// Targets only. Every channel, including shader deformation, has a finite budget.
+export const neutralPose = (): ScenePose => ({ x: 0, y: 0, z: 0, lift: 0, retreat: 0, scale: 1, phase: 0, wave: 0, tension: 0, twist: 0, shine: 1 })
 export function mapScenePose(input: SceneInputs, time: number, motion: boolean, out: ScenePose, compact = false): ScenePose {
   if (!motion) return Object.assign(out, neutralPose())
-  const cycle = clamp(time, 0, Number.MAX_SAFE_INTEGER) * TAU / IDLE_PERIOD
-  const intensity = compact ? 0.55 : 1
-  const pointerLimit = MAX_TILT * (compact ? 0.45 : 0.82)
+  const seconds = clamp(time, 0, Number.MAX_SAFE_INTEGER)
+  const cycle = seconds * TAU / IDLE_PERIOD
+  const intensity = compact ? 0.72 : 1
+  const pointerLimit = compact ? 0.025 : 0.06
   const scroll = clamp(input.scroll, 0, 1)
-  out.x = clamp(-clamp(input.pointerY, -1, 1) * pointerLimit + Math.sin(cycle) * 0.015 * intensity, -MAX_TILT, MAX_TILT)
-  out.y = clamp(clamp(input.pointerX, -1, 1) * pointerLimit + Math.sin(cycle + 0.9) * 0.025 * intensity, -MAX_TILT, MAX_TILT)
-  out.z = Math.sin(cycle - 0.4) * 0.012 * intensity
-  const tilt = Math.hypot(out.x, out.y, out.z)
-  if (tilt > MAX_TILT) {
-    const ratio = MAX_TILT / tilt
-    out.x *= ratio
-    out.y *= ratio
-    out.z *= ratio
-  }
-  out.lift = scroll * (compact ? 0.1 : 0.22)
-  out.retreat = -scroll * (compact ? 0.22 : 0.5)
-  out.scale = 1 - scroll * (compact ? 0.025 : 0.045)
-  out.breath = Math.sin(cycle - 0.5) * MAX_BREATH * intensity
-  out.twist = Math.sin(cycle + 0.3) * MAX_TWIST * intensity
-  out.shine = 1
-  if (input.audio?.playing) {
-    out.breath = clamp(out.breath + clamp(input.audio.bass, 0, 1) * 0.012 * intensity, -0.021, 0.021)
-    out.twist = clamp(out.twist + clamp(input.audio.mid, 0, 1) * 0.022 * intensity, -0.04, 0.04)
-    out.shine = 1 + clamp(input.audio.high, 0, 1) * 0.12 * intensity
-  }
+  out.x = -clamp(input.pointerY,-1,1)*pointerLimit + Math.sin(cycle)*0.075*intensity
+  out.y = clamp(input.pointerX,-1,1)*pointerLimit + Math.sin(cycle+0.9)*0.14*intensity
+  out.z = Math.sin(cycle-0.4)*0.045*intensity
+  const tilt = Math.hypot(out.x,out.y,out.z)
+  if (tilt > MAX_TILT) { const ratio = MAX_TILT/tilt; out.x*=ratio; out.y*=ratio; out.z*=ratio }
+  out.lift = scroll*(compact?0.1:0.18); out.retreat = -scroll*(compact?0.22:0.5); out.scale = 1-scroll*(compact?0.025:0.045)
+  out.phase = seconds*TAU/WAVE_PERIOD
+  out.wave = compact ? 0.82 : 1
+  const audio = input.audio
+  out.tension = audio?.playing ? clamp(audio.bass,0,1)*MAX_TENSION : 0
+  out.twist = audio?.playing ? clamp(audio.mid,0,1)*MAX_TWIST : 0
+  out.shine = 1+(audio?.playing ? clamp(audio.high,0,1)*0.18 : 0)
   return out
 }
-
-export function damp(current: number, target: number, delta: number) {
-  return current + (target - current) * (1 - Math.exp(-5 * clamp(delta, 0, 0.05)))
-}
-
-/** Sole owner of time, target mapping, quaternion settling and uniform smoothing.
- * Events write inputs; Fiber calls step. No event handler writes a mesh/uniform.
- */
+export function damp(current: number, target: number, delta: number, rate = 5) { return current+(target-current)*(1-Math.exp(-rate*clamp(delta,0,0.05))) }
 export function createSceneController(inputs: SceneInputs) {
-  const pose = neutralPose()
-  const target = neutralPose()
-  const orientation = new Quaternion()
-  const targetOrientation = new Quaternion()
-  const euler = new Euler()
-  let time = 0
-  return {
-    inputs, pose, orientation,
-    get time() { return time },
-    step(rawDelta: number, { motion, active, compact }: SceneOptions) {
-      if (!motion) {
-        Object.assign(pose, mapScenePose(inputs, time, false, target, compact))
-        orientation.identity()
-        return pose
-      }
-      if (!active) return pose
-      const delta = clamp(rawDelta, 0, 0.05)
-      time = (time + delta) % IDLE_PERIOD
-      mapScenePose(inputs, time, true, target, compact)
-      targetOrientation.setFromEuler(euler.set(target.x, target.y, target.z))
-      orientation.slerp(targetOrientation, 1 - Math.exp(-5 * delta))
-      pose.x = target.x
-      pose.y = target.y
-      pose.z = target.z
-      pose.lift = damp(pose.lift, target.lift, delta)
-      pose.retreat = damp(pose.retreat, target.retreat, delta)
-      pose.scale = damp(pose.scale, target.scale, delta)
-      pose.breath = damp(pose.breath, target.breath, delta)
-      pose.twist = damp(pose.twist, target.twist, delta)
-      pose.shine = damp(pose.shine, target.shine, delta)
-      return pose
-    },
-  }
+  const pose=neutralPose(), target=neutralPose(), orientation=new Quaternion(), targetOrientation=new Quaternion(), identity=new Quaternion(), euler=new Euler()
+  let time=0
+  return { inputs, pose, orientation, get time(){return time}, step(rawDelta: number, {motion,active,compact}: SceneOptions){
+    if(!motion){Object.assign(pose,neutralPose());orientation.identity();return pose}
+    if(!active)return pose
+    const delta=clamp(rawDelta,0,0.05)
+    time=(time+delta)%IDLE_PERIOD
+    mapScenePose(inputs,time,true,target,compact)
+    targetOrientation.setFromEuler(euler.set(target.x,target.y,target.z));const angle=targetOrientation.angleTo(identity);if(angle>MAX_TILT)targetOrientation.slerp(identity,1-MAX_TILT/angle);orientation.slerp(targetOrientation,1-Math.exp(-4*delta))
+    pose.x=target.x;pose.y=target.y;pose.z=target.z;pose.phase=target.phase
+    pose.lift=damp(pose.lift,target.lift,delta);pose.retreat=damp(pose.retreat,target.retreat,delta);pose.scale=damp(pose.scale,target.scale,delta)
+    pose.wave=damp(pose.wave,target.wave,delta,6)
+    pose.tension=damp(pose.tension,target.tension,delta,target.tension>pose.tension?13:3.2)
+    pose.twist=damp(pose.twist,target.twist,delta,target.twist>pose.twist?10:3)
+    pose.shine=damp(pose.shine,target.shine,delta,target.shine>pose.shine?12:3.5)
+    return pose
+  }}
 }

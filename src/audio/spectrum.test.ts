@@ -46,9 +46,9 @@ describe('generated score and measured energy', () => {
     const input = { pointerX: 1, pointerY: 1, scroll: 1, audio }
     for (let time = 0; time < 18; time += 0.2) {
       const pose = mapScenePose(input, time, true, neutralPose())
-      expect(Math.abs(pose.breath)).toBeLessThanOrEqual(0.021)
-      expect(Math.abs(pose.twist)).toBeLessThanOrEqual(0.04)
-      expect(pose.shine).toBeLessThanOrEqual(1.12)
+      expect(Math.abs(pose.tension)).toBeLessThanOrEqual(0.5)
+      expect(Math.abs(pose.twist)).toBeLessThanOrEqual(0.32)
+      expect(pose.shine).toBeLessThanOrEqual(1.18)
     }
     expect(mapScenePose(input, 4, false, neutralPose())).toEqual(neutralPose())
     audio.playing = false
@@ -60,7 +60,8 @@ describe('generated score and measured energy', () => {
     expect(audioMatches('echo', audio)).toBe(true)
     const pose = { compression: 0, drift: 0, signal: 0, wave: 0 }
     expect(mapAudioStudy('echo', audio, pose).signal).toBe(4)
-    expect(mapAudioStudy('form', audio, pose).compression).toBe(0.65)
-    expect(mapAudioStudy('afterimage', audio, pose)).toMatchObject({ drift: 6, wave: 0.7 })
+    expect(mapAudioStudy('form', audio, pose).compression).toBe(0.06)
+    expect(mapAudioStudy('afterimage', audio, pose)).toMatchObject({ drift: 4, wave: 0.55 })
   })
 })
+

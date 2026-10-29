@@ -22,7 +22,7 @@ async (page) => {
       })
       assert(state.scroll <= state.layout && state.titleRight <= state.layout, 'Horizontal overflow')
       assert(state.material === 'shader', 'Custom shader was not compiled')
-      assert(state.pose.breath === 0 && state.pose.twist === 0, 'Reduced-motion deformation')
+      assert(state.pose.wave === 0 && state.pose.tension === 0 && state.pose.twist === 0, 'Reduced-motion deformation')
       results.viewports.push(state)
       if (width === 1440 || width === 390) await test.screenshot({ path: `artifacts/qa/phase2-fixture-${width}.png` })
     }
@@ -44,9 +44,9 @@ async (page) => {
       const original = WebGL2RenderingContext.prototype.shaderSource
       let injected = false
       WebGL2RenderingContext.prototype.shaderSource = function (shader, source) {
-        if (!injected && source.includes('vec3 phasePosition')) {
+        if (!injected && source.includes('vec3 ribbonPosition')) {
           injected = true
-          source = source.replace('vec3 phasePosition', 'vec3 INVALID_SYNTAX phasePosition')
+          source = source.replace('vec3 ribbonPosition', 'vec3 INVALID_SYNTAX ribbonPosition')
         }
         return original.call(this, shader, source)
       }
@@ -54,7 +54,7 @@ async (page) => {
     const test = await broken.newPage()
     await test.goto(base)
     await test.locator('.phase-visual[data-material="standard"][data-ready="true"]').waitFor()
-    results.shaderFallback = await test.locator('canvas').isVisible()
+    results.shaderFallback = await test.locator('.phase-visual canvas').isVisible()
     assert(results.shaderFallback, 'Standard material fallback did not render')
   } finally { await broken.close() }
 

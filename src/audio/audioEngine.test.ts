@@ -197,5 +197,17 @@ describe('audio lifecycle and consent', () => {
     await starting
     engine.dispose()
   })
+  it('exposes native playhead time without creating a context and meters near 30 Hz',async()=>{
+    const {engine,context,factory}=fixture()
+    expect(engine.getPlayheadTime()).toBe(0);expect(factory).not.toHaveBeenCalled()
+    await engine.play('form')
+    context.currentTime=1.025;expect(engine.getPlayheadTime()).toBeCloseTo(1)
+    const listener=vi.fn(),unsubscribe=engine.subscribeMeter(listener)
+    const raf=vi.mocked(requestAnimationFrame)
+    for(let now=1000;now<=2000;now+=25){const callback=raf.mock.calls.at(-1)![0];callback(now)}
+    expect(listener.mock.calls.length-1).toBeGreaterThanOrEqual(29);expect(listener.mock.calls.length-1).toBeLessThanOrEqual(32)
+    engine.stop();expect(engine.getPlayheadTime()).toBeCloseTo(1)
+    unsubscribe();engine.dispose()
+  })
 })
 

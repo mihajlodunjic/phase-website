@@ -128,3 +128,7 @@ section[tabindex='-1']:focus-visible { outline: none; }
 .approach .approach-hint { font-size: 12px; }
 .approach h3 button span { font-size: 12px; }
 
+.study-stage { width: 100%; height: 100%; position: relative; }
+.study-surface { display: block; width: 100%; height: 100%; position: absolute; inset: 0; visibility: hidden; }
+.study-stage[data-renderer='webgl'] > .study-surface { visibility: visible; }
+.study-stage[data-renderer='webgl'] > .study-visual { visibility: hidden; }
