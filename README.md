@@ -145,3 +145,40 @@ argument, with a fresh production preview on 4173 (no extra site dependencies):
 checks; normal visits do not update diagnostics. It is not a second renderer.
 
 See `PHASE_PLAN.md` for the checklist and `QA.md` for actual results and limits.
+
+## Final brief and review / phase 5
+
+The project brief uses an input view and a result view. Required project-name/description
+errors are linked to their fields and focus the first invalid input. Generate
+focuses the result heading. Edit details preserves the original draft, including
+multiline text; generating again replaces the output. Close and the primary
+action remain outside the scrolling body. Copy brief writes the generated text
+to the real Clipboard API; a missing/denied API focuses and selects all text for
+manual copying. Details exist only in page memory. No contact or submission is
+simulated. Closing restores the original CTA (or Menu for the mobile menu action).
+
+Footer anchors and Skip to content explicitly focus their destination. The
+mobile menu also opens the project brief. Small labels are at least 12px and
+key touch controls are at least 44px high. The 1280x720 hero uses a slightly
+smaller display size so both hero actions remain visible.
+
+`useVisualActivity` shares one visibility listener and one dialog-attribute
+observer. It gates each view by viewport intersection, page visibility, motion
+and modal ownership. Decorative visuals behind a modal rest; a study motif
+inside that modal can run. This avoids using GPU work to animate an obscured
+hero. The existing slow motion budgets and reduced-motion static states remain.
+
+Additional production browser functions:
+
+- `qa/phase5-checks.js`: all five viewport layouts, brief validation/editing,
+  actual clipboard write/read, manual-copy fallbacks, focus and footer anchors.
+- `qa/phase5-access-checks.js`: DOM text contrast, focus/error associations,
+  mobile menu CTA, player focus visibility and 640x360 reflow. This is a targeted
+  audit, not a screen-reader test or accessibility certification.
+- `qa/phase5-performance-checks.js`: new-context startup, warm RAF distribution,
+  WebGL2 timer queries for the mesh draw, modal/motion-off rest and resource counts.
+
+`QA.md` records the actual Windows/Chrome backend and measured samples. Physical
+phones, Safari/Android, system font differences, real OS lifecycle, assistive
+technology and subjective audio listening remain manual verification limits.
+

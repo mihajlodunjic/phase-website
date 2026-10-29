@@ -87,3 +87,137 @@ Visit https://react.dev/link/error-boundaries to learn more about error boundari
 [  432411ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:15557
 [  432935ms] [WARNING] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://127.0.0.1:5173/@vite/client:367
 [ 1156776ms] [WARNING] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://127.0.0.1:4173/assets/Scene-UlhhLn_O.js:0
+[38123965ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:15557
+[38124625ms] [WARNING] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://127.0.0.1:5173/@vite/client:367
+[38393136ms] [ERROR] React has detected a change in the order of Hooks called by %s. This will lead to bugs and errors if not fixed. For more information, read the Rules of Hooks: https://react.dev/link/rules-of-hooks
+
+   Previous render            Next render
+   ------------------------------------------------------
+%s   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ StudyVisual 1. useId                      useId
+2. useContext                 useContext
+3. useSyncExternalStore       useSyncExternalStore
+4. useRef                     useRef
+5. useRef                     useRef
+6. useRef                     useRef
+7. useState                   useState
+8. useState                   useSyncExternalStore
+ @ http://127.0.0.1:5173/@vite/client:367
+[38393151ms] Error: Rendered more hooks than during the previous render.
+    at updateWorkInProgressHook (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:4269:12)
+    at updateEffectImpl (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:4796:15)
+    at Object.useEffect (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:14279:5)
+    at exports.useEffect (http://127.0.0.1:5173/node_modules/.vite/deps/react-4hkZzRew.js?v=bc7f54dc:737:31)
+    at StudyVisual (http://127.0.0.1:5173/src/visuals/StudyVisual.tsx?t=1793265355489:199:2)
+    at Object.react_stack_bottom_frame (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:13895:12)
+    at renderWithHooks (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:4153:19)
+    at updateFunctionComponent (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:5528:16)
+    at beginWork (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:6144:20)
+    at runWithFiberInDEV (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:697:66)
+[38393151ms] [WARNING] %s
+
+%s
+ An error occurred in the <StudyVisual> component. Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries. @ http://127.0.0.1:5173/@vite/client:367
+[38393347ms] ReferenceError: observer is not defined
+    at http://127.0.0.1:5173/src/scene/PhaseCanvas.tsx?t=1793265355559:47:4
+    at Object.react_stack_bottom_frame (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:13935:5)
+    at runWithFiberInDEV (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:697:66)
+    at commitHookEffectListUnmount (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:6679:149)
+    at commitHookPassiveUnmountEffects (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:6692:55)
+    at disconnectPassiveEffect (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8305:6)
+    at recursivelyTraverseDisconnectPassiveEffects (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8297:65)
+    at disconnectPassiveEffect (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8312:14)
+    at recursivelyTraverseDisconnectPassiveEffects (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8297:65)
+    at disconnectPassiveEffect (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8312:14)
+[38393348ms] [WARNING] %s
+
+%s
+ An error occurred in the <PhaseCanvas> component. Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries. @ http://127.0.0.1:5173/@vite/client:367
+[38393352ms] ReferenceError: observer is not defined
+    at http://127.0.0.1:5173/src/scene/PhaseCanvas.tsx?t=1793265355559:47:4
+    at Object.react_stack_bottom_frame (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:13935:5)
+    at runWithFiberInDEV (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:697:66)
+    at commitHookEffectListUnmount (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:6679:149)
+    at commitHookPassiveUnmountEffects (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:6692:55)
+    at commitPassiveUnmountEffectsInsideOfDeletedTree_begin (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8327:7)
+    at recursivelyTraversePassiveUnmountEffects (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8246:6)
+    at commitPassiveUnmountOnFiber (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8265:6)
+    at flushPassiveEffects (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:9332:5)
+    at flushPendingEffects (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:9297:11)
+[38393353ms] [WARNING] %s
+
+%s
+ An error occurred in the <PhaseCanvas> component. Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries. @ http://127.0.0.1:5173/@vite/client:367
+[38393879ms] ReferenceError: observer is not defined
+    at http://127.0.0.1:5173/src/scene/PhaseCanvas.tsx?t=1793265355559:47:4
+    at Object.react_stack_bottom_frame (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:13935:5)
+    at runWithFiberInDEV (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:697:66)
+    at commitHookEffectListUnmount (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:6679:149)
+    at commitHookPassiveUnmountEffects (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:6692:55)
+    at disconnectPassiveEffect (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8305:6)
+    at recursivelyTraverseDisconnectPassiveEffects (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8297:65)
+    at disconnectPassiveEffect (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8312:14)
+    at recursivelyTraverseDisconnectPassiveEffects (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8297:65)
+    at disconnectPassiveEffect (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8312:14)
+[38393879ms] [WARNING] %s
+
+%s
+ An error occurred in the <PhaseCanvas> component. Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries. @ http://127.0.0.1:5173/@vite/client:367
+[38393882ms] ReferenceError: observer is not defined
+    at http://127.0.0.1:5173/src/scene/PhaseCanvas.tsx?t=1793265355559:47:4
+    at Object.react_stack_bottom_frame (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:13935:5)
+    at runWithFiberInDEV (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:697:66)
+    at commitHookEffectListUnmount (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:6679:149)
+    at commitHookPassiveUnmountEffects (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:6692:55)
+    at commitPassiveUnmountEffectsInsideOfDeletedTree_begin (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8327:7)
+    at recursivelyTraversePassiveUnmountEffects (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8246:6)
+    at commitPassiveUnmountOnFiber (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8265:6)
+    at flushPassiveEffects (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:9332:5)
+    at flushPendingEffects (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:9297:11)
+[38393883ms] [WARNING] %s
+
+%s
+ An error occurred in the <PhaseCanvas> component. Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries. @ http://127.0.0.1:5173/@vite/client:367
+[38439983ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:15557
+[38440274ms] ReferenceError: observer is not defined
+    at http://127.0.0.1:5173/src/scene/PhaseCanvas.tsx?t=1793265355559:47:4
+    at Object.react_stack_bottom_frame (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:13935:5)
+    at runWithFiberInDEV (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:697:66)
+    at commitHookEffectListUnmount (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:6679:149)
+    at commitHookPassiveUnmountEffects (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:6692:55)
+    at disconnectPassiveEffect (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8305:6)
+    at recursivelyTraverseDisconnectPassiveEffects (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8297:65)
+    at disconnectPassiveEffect (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8312:14)
+    at recursivelyTraverseDisconnectPassiveEffects (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8297:65)
+    at disconnectPassiveEffect (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8312:14)
+[38440275ms] [WARNING] %s
+
+%s
+ An error occurred in the <PhaseCanvas> component. Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries. @ http://127.0.0.1:5173/@vite/client:367
+[38440282ms] ReferenceError: observer is not defined
+    at http://127.0.0.1:5173/src/scene/PhaseCanvas.tsx?t=1793265355559:47:4
+    at Object.react_stack_bottom_frame (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:13935:5)
+    at runWithFiberInDEV (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:697:66)
+    at commitHookEffectListUnmount (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:6679:149)
+    at commitHookPassiveUnmountEffects (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:6692:55)
+    at commitPassiveUnmountEffectsInsideOfDeletedTree_begin (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8327:7)
+    at recursivelyTraversePassiveUnmountEffects (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8246:6)
+    at commitPassiveUnmountOnFiber (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:8265:6)
+    at flushPassiveEffects (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:9332:5)
+    at flushPendingEffects (http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:9297:11)
+[38440281ms] [WARNING] %s
+
+%s
+ An error occurred in the <PhaseCanvas> component. Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries. @ http://127.0.0.1:5173/@vite/client:367
+[38491283ms] [WARNING] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://127.0.0.1:5173/@vite/client:367
+[38493457ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=dacd8ec5:15557
+[38493867ms] [WARNING] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://127.0.0.1:5173/@vite/client:367
+[40045004ms] [WARNING] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://127.0.0.1:4173/assets/Scene-Gwd7Zi4u.js:0
+[40046085ms] [WARNING] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://127.0.0.1:4173/assets/Scene-Gwd7Zi4u.js:0

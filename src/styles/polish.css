@@ -1,0 +1,48 @@
+﻿/* Phase 5: use the existing hierarchy; keep the small UI legible and reachable. */
+.work-intro .motion-control, .study-entry-bottom > span, .audio-progress span { font-size: 12px; }
+.volume-control input, .study-dialog-bottom .motion-control { min-height: 44px; }
+.study-dialog .study-panel { scrollbar-gutter: stable; scroll-padding: 12px; }
+.study-panel-controls .button:disabled { opacity: 1; color: var(--muted); border-color: #687264; }
+.footer { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 32px; }
+.footer nav { display: flex; justify-content: center; gap: 22px; flex-wrap: wrap; }
+.footer nav a { min-height: 44px; display: inline-flex; align-items: center; gap: 10px; font-size: 13px; }
+.footer p { font-size: 12px; text-align: right; }
+#top:focus, #main:focus { outline: none; }
+body:has(.global-audio-player) { scroll-padding-bottom: 120px; }
+html:has(.global-audio-player) { scroll-padding-bottom: 120px; }
+body:has(.global-audio-player) :is(button, a, input):not(dialog *) { scroll-margin-bottom: 120px; }
+@media (max-width: 1000px) {
+  .footer { grid-template-columns: auto 1fr; gap: 20px 28px; }
+  .footer nav { grid-column: 1 / -1; grid-row: 2; justify-content: flex-start; }
+  .footer p { margin: 0 0 0 auto; max-width: 230px; }
+}
+@media (max-width: 760px) {
+  .footer { padding-block: 28px; }
+  .footer nav { gap: 4px 22px; }
+  .footer nav a { font-size: 12px; }
+  .footer .wordmark { font-size: 34px; }
+  .footer p { max-width: 180px; }
+  .study-dialog-bottom .motion-control { min-height: 44px; }
+  html:has(.global-audio-player) { scroll-padding-bottom: 185px; }
+  body:has(.global-audio-player) :is(button, a, input):not(dialog *) { scroll-margin-bottom: 185px; }
+}
+@media (max-width: 360px) {
+  .brief-actions { grid-template-columns: 1fr 1fr; }
+  .brief-actions .button { padding-inline: 10px; font-size: 13px; }
+}
+
+.header > .wordmark, .footer > .wordmark { min-height: 44px; display: inline-flex; align-items: center; }
+@media (min-width: 1101px) and (max-height: 780px) {
+  .hero { padding-top: 32px; }
+  .hero h1 { font-size: clamp(120px, 11.5vw, 170px); }
+  .hero-description { margin-top: 24px; }
+  .hero-actions { margin-top: 22px; }
+}
+.nav-project { display: none; }
+@media (max-width: 760px) {
+  .nav-project { display: flex; min-height: 50px; align-items: center; justify-content: space-between; margin-top: 12px; padding: 14px 4px 0; border-top: 1px solid var(--rule); font-size: 18px; text-align: left; }
+  .nav-project span { color: var(--accent); }
+}
+.footer nav a, .navigation > a { min-width: 44px; }
+.navigation > a { text-align: center; }
+@media (max-width: 760px) { .navigation > a { text-align: left; } }

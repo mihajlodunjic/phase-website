@@ -1,8 +1,10 @@
-@import './tokens.css';
+﻿@import './tokens.css';
 @import './hero.css';
 @import './sections.css';
 @import './studies.css';
 @import './audio.css';
+@import './brief.css';
+@import './polish.css';
 
 * { box-sizing: border-box; }
 html { scrollbar-gutter: stable; scroll-behavior: smooth; scroll-padding-top: 24px; color-scheme: dark; }
@@ -33,3 +35,4 @@ svg { display: block; }
 section[id] { scroll-margin-top: 24px; }
 @media (prefers-reduced-motion: reduce) { html { scrollbar-gutter: stable; scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
 html:has([data-motion='off']) { scroll-behavior: auto; }
+

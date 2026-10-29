@@ -362,3 +362,141 @@ Turn sound off daje off/0 voices/4 nodes/1 context. Sledeći Enable sound daje
 ready/0 voices u istom kontekstu, bez autoplay-a. Tap Play/Stop AFTERIMAGE u
 panelu radi. Zabeleženo 0 page/console errors i 5 lokalnih resource URL-ova,
 bez udaljenih zahteva. Ovo je emulacija, ne fizički telefon.
+
+## Faza 5 — završni brief, polish i QA (2026-10-29)
+
+### Završeni rad
+
+- Brief je native modal sa zasebnim unosom i rezultatom. Close i Generate/Copy
+  ostaju u fiksnim delovima dijaloga; samo telo se skroluje. Nema backend-a,
+  izmišljenog kontakta, slanja ili “Message sent” stanja.
+- Required project/description validacija odbacuje i whitespace. Svaka greška je
+  povezana aria-describedby/aria-invalid, fokus prelazi na prvo pogrešno polje.
+  Generate fokusira naslov rezultata; Edit details čuva unesene detalje i sledeće
+  generisanje menja rezultat. Escape vraća fokus pravom opener-u.
+- Clipboard API stvarno kopira tekst. Read-back upoređivanje prolazi na svih pet
+  širina. Windows clipboard vraća CRLF, pa poređenje normalizuje samo te prelome
+  reda; sadržaj i redosled su isti. Odbijen API i potpuno odsutan API selektuju
+  kompletan output za ručno kopiranje i daju iskrenu poruku.
+- Footer sada ima Work / Approach / Studio / Back to top anchor linkove. Skip i
+  anchor radnje pomeraju i fokus. Mobilni meni ima Start a project i vraća fokus
+  na Menu posle zatvaranja briefa. Native skrol i zoom nisu blokirani.
+- Sitne oznake su najmanje 12 px, form border/placeholder kontrast je pojačan,
+  range i Motion kontrole imaju 44 px visinu. Hero pri 1280×720 koristi malo manji
+  display type i razmake: hero actions bottom sada ~689.8 px (pre ~742.8 px).
+- Zadržani charcoal/silver/acid, masivan condensed sistemski font i različite
+  FORM/ECHO/AFTERIMAGE kompozicije. Nema dodatih medija, fontova ili zavisnosti.
+  Postojeći 18 s idle i ograničena deformacija su zadržani nakon pregleda u radu.
+- Jedan deljeni activity observer/listener pauzira hero i pozadinske SVG motive
+  iza otvorenog dijaloga. Studija unutar aktivnog dijaloga ostaje funkcionalna.
+
+### Izvršene provere
+
+- `npm.cmd run typecheck`, `npm.cmd test` (**45 testova, 8 fajlova**) i
+  `npm.cmd run build` prolaze. Dodatni brief testovi proveravaju pojedinačne
+  field errors i potpun multiline output sa unetim opcionalnim detaljima.
+- Prošli novi fixture-i `qa/phase5-checks.js`, `qa/phase5-access-checks.js` i
+  `qa/phase5-performance-checks.js` protiv lokalnog production preview-a na 4173.
+- Ponovljeni `qa/scene-checks.js`, `qa/studies-checks.js`, `qa/audio-checks.js`
+  i `qa/audio-endings-checks.js` prolaze. Scene resursi su stabilni u 10 resize
+  ciklusa; shader i WebGL fallback rade. Vizuelni izbori stvaraju 0 konteksta.
+- Ponovo su sačekani prirodni krajevi PHASE/FORM/ECHO/AFTERIMAGE (4/8/9/12 s):
+  stopped/ended, progress=duration, 0 voices, 4 shared nodes, 1 context, energija 0.
+- Normalni phase-5 i audio-state browser prolazi: **0 page/console errors**.
+  Namerni WebGL fallback fixture proizvodi očekivanu grešku; poznati Three/Fiber
+  Clock warning i Vite chunk-size warning ostaju, nisu sakriveni.
+
+### Prikazi i pristupačnost
+
+Testirano u **Chrome 155 / Windows / Intel UHD Graphics 620, ANGLE D3D11**.
+Nije test na fizičkom telefonu.
+
+| CSS viewport | Nalaz |
+| --- | --- |
+| 1440×900 | Ceo tok, sve sekcije i brief; bez horizontalnog preliva. |
+| 1280×720 | CTA u prvom ekranu, brief Close/Copy dostupni. |
+| 768×1024 | Tablet raspored, studije, brief i navigacija. |
+| 390×844 | Mobilni meni/brief, sve kontrole i clipboard. |
+| 320×568 | Naslov, studije, brief unos/rezultat i manual copy. |
+| 640×360 | Reflow ekvivalent 1280×720 na 200%; bez horizontalnog preliva. |
+
+640×360 je **emulacija reflow viewport-a**, nije dokaz izvršenog browser zoom
+ili pinch testa. Meta viewport ne ograničava maximum-scale/user-scalable.
+
+- Native Tab/Shift+Tab kruže unutar modala; Close ima početni fokus, rezultat
+  dobija programski fokus, Escape vraća opener. Header/mobile/footer anchor-i
+  menjaju hash i fokus. Meni i brief iz menija imaju pravilan povratak fokusa.
+- Aktivni player ne prekriva proverene fokusirane View FORM / Play ECHO / Start
+  a project / footer Back to top kontrole na 390 px.
+- Targeted DOM contrast uzorak: 78 tekstualnih elemenata na stranici, minimalni
+  kontrast ~8.11:1; 17 u formi sa greškama, minimum ~7.25:1. Minimum font-size
+  u oba uzorka 12 px. Obuhvaćene su CSS podloge/opacity; SVG/PBR pikseli, native
+  popup kontrole i svaki mogući browser state nisu certifikovani tim skriptom.
+- Decorative Canvas/SVG je aria-hidden; tekst, opisi, kontrole i status ostaju
+  HTML. Jedan main/H1. Reduced motion od učitavanja i živa promena preference,
+  Motion off, izbor studije i audio ostaju provereni kroz regresije.
+- Touch emulacija **390×844 / DPR3**: stvaran browser touch potez skroluje brief
+  body 0→34.4 px, dok page scroll ostaje 0→0. Close top ~18.8 px, Generate footer
+  bottom ~835.2 px. Tap Generate radi i Escape vraća Menu. Zoom nije zabranjen.
+
+Screenshot dokazi su u `artifacts/qa/`: `phase5-page-{1440,1280,768,390,320}.png`,
+`phase5-brief-{1440,1280,768,390,320}.png`, `phase5-copy-fallback-320.png`,
+`phase5-reflow-640x360.png`, `phase5-touch-390.png` i zasebni statement/approach/
+studio/contact/footer desktop prikazi. Pregledani su stvarni screenshotovi, ne
+samo DOM dimenzije. Desktop 1280 i mobilni rezultat korigovani su posle pregleda.
+
+### Performanse i vlasništvo resursa
+
+Metod: novi browser context po 1440×900 DPR1 i 390×844 emulaciji DPR3; sačekana
+scene-ready oznaka, 30 warm-up RAF-ova, zatim 120 RAF intervala. Browser proces i
+shader cache mogu već biti zagrejani: startup nije hladno pokretanje uređaja.
+
+| Uzorak | 1440×900 | 390×844 / DPR3 emulacija |
+| --- | ---: | ---: |
+| Scene-ready, približno od navigacije | 1016 ms | 1222 ms |
+| Najduži startup long task | 268 ms | 379 ms |
+| Warm RAF p50 / p95 / max | 23.5 / 24.7 / 25.5 ms | 24.3 / 26.1 / 27.4 ms |
+| Warm long tasks | 0 | 0 |
+| GPU mesh draw p50 / p95 | 3.68 / 3.72 ms | 1.79 / 1.81 ms |
+| Drawing buffer / CSS canvas | 663×621 / 663×621 | 457×429 / 366×344 |
+| Triangles / draw calls | 23,296 / 1 | 11,520 / 1 |
+
+GPU uzorak koristi EXT_disjoint_timer_query_webgl2 oko gl.drawElements: 60 završenih
+query-ja u oba slučaja, disjoint=false; query-ji se brišu i originalna funkcija
+vraća. To je **vreme jednog mesh draw-a**, ne kompletno vreme frame-a, JavaScript,
+compositing ili prezentacija. Niži GPU draw od RAF intervala ne dokazuje precizan
+CPU bottleneck bez CPU trace-a; ceo ritam i startup ostaju važni. Cilj stabilnih
+60 fps nije potvrđen, a emulirani telefon koristi isti desktop GPU.
+
+Isti otkriveni renderer je ANGLE Intel UHD 620 / Direct3D11. Mobilni renderer DPR
+je ograničen na 1.25 iako emulirani ekran ima DPR3; geometrija je manja. Nisu
+menjani shader/materijal radi brojki niti je smanjen kvalitet bez poređenja.
+
+Modal closed→open uzorak: desktop render counter 260→260 tokom 30 page RAF-ova,
+mobilni 270→270, bez aktivnih background SVG motiva. Motion off: 266→266 /
+276→276. Hidden/return event simulacija radi; renderer se vraća bez velikog delta.
+U svim mirovanjima i resize regresiji ostaju **1 geometry / 2 textures / 1 program**.
+Shared activity observer i visibility listener se odjavljuju kada nema korisnika;
+svaki vizual odjavljuje svoj IntersectionObserver. Postojeći environment target,
+geometry/material i audio cleanup ostaju na vlasniku. Ovi brojači nisu native
+GC, tačna GPU memorija ili dokaz odsustva svih vrsta curenja.
+
+Finalni bundle približno: glavni JS 270.73 kB / 84.77 kB gzip, CSS 27.11 kB /
+6.08 kB gzip, lazy Three scena 922.11 kB / 245.65 kB gzip. Veliki scene chunk i
+startup long tasks ostaju konkretni kandidati za naredno profilisanje; nisu
+zamaskirani samo deljenjem vendor fajlova da nestane upozorenje.
+
+### Preostale granice
+
+Nisu izvršeni: fizički iPhone/Android, Safari, screen reader, pravi browser zoom,
+pravi OS background/BFCache lifecycle ili subjektivno slušanje na audio izlazu.
+Sistemske fontove treba pregledati na ciljnim OS-ovima; code-only verzija nema
+skrivene font fajlove. Simulacije i Windows browser proveravaju ponašanje u ovom
+okruženju, ne zamenu za te uređaje. Ne tvrdi se WCAG certifikat ili mobile FPS.
+
+Lokalni preview je ostavljen sa Sound off. Nema novog repoa, remota, commit-a,
+push-a, deployment-a ili eksternih servisa.
+
+Dopunska završna provera: brief Generate i ručna selekcija prolaze i sa potpuno
+isključenim WebGL-om (`briefWithoutWebGL=true` u phase5 fixture-u). Ponovljeni su
+finalni typecheck, svih 45 testova i production build, bez novih grešaka.

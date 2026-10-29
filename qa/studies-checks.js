@@ -56,7 +56,7 @@ async (page) => {
           await test.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }))
           await test.getByRole('button', { name: 'Menu', exact: true }).click()
           assert(await test.evaluate(() => document.activeElement.textContent) === 'Work', 'Menu did not focus first link')
-          await test.getByRole('navigation').getByRole('link', { name: section, exact: true }).click()
+          await test.getByRole('navigation', { name: 'Main navigation', exact: true }).getByRole('link', { name: section, exact: true }).click()
           await test.waitForFunction(id => document.activeElement.id === id, section.toLowerCase())
           assert(test.url().endsWith(`#${section.toLowerCase()}`), 'Anchor URL missing')
           assert(await test.getByRole('button', { name: 'Menu', exact: true }).getAttribute('aria-expanded') === 'false', 'Menu remained open')
@@ -121,4 +121,5 @@ async (page) => {
   } finally { await unsupported.close() }
   return results
 }
+
 

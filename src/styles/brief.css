@@ -1,0 +1,56 @@
+﻿.brief-dialog { max-width: none; width: min(660px, calc(100% - 32px)); max-height: calc(100dvh - 32px); background: var(--surface); color: var(--foreground); border: 1px solid #67705f; padding: 0; overflow: hidden; }
+.brief-dialog[open] { display: flex; flex-direction: column; }
+.brief-dialog::backdrop { background: rgba(0, 0, 0, .82); }
+.dialog-top { flex: none; display: flex; justify-content: space-between; align-items: center; margin: 0 32px; padding-block: 16px 14px; border-bottom: 1px solid var(--rule); }
+.dialog-top .wordmark { font-size: 30px; }
+.dialog-top button { min-height: 44px; padding: 8px 0 8px 16px; font-size: 13px; }
+.dialog-top button span { margin-left: 14px; font-size: 20px; }
+.brief-body { padding: 28px 32px 24px; overflow: auto; overscroll-behavior: contain; min-height: 0; scrollbar-gutter: stable; }
+.brief-dialog h2 { font-family: var(--display); font-size: clamp(36px, 3.3vw, 46px); font-weight: 400; line-height: 1.06; letter-spacing: -.02em; margin-bottom: 12px; }
+.brief-dialog h2:focus { outline: none; }
+#brief-intro { font-size: 14px; max-width: 54ch; }
+.brief-dialog form { display: grid; margin-top: 28px; }
+.brief-dialog [hidden] { display: none; }
+.brief-dialog label { display: block; font-size: 14px; line-height: 1.4; margin-bottom: 8px; }
+.brief-dialog label span { color: var(--muted); font-size: 12px; margin-left: 4px; }
+.brief-dialog input, .brief-dialog select, .brief-dialog textarea { display: block; width: 100%; min-width: 0; background: var(--background); border: 1px solid #70796c; color: var(--foreground); min-height: 48px; padding: 12px; font-size: 16px; line-height: 1.5; margin-bottom: 22px; }
+.brief-dialog textarea { resize: vertical; }
+.brief-dialog input::placeholder { color: var(--muted); opacity: 1; }
+.brief-dialog [aria-invalid='true'] { border-color: #ffc09b; }
+.brief-dialog .field-error { color: #ffc09b; font-size: 13px; margin-top: -14px; margin-bottom: 22px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-row input { margin-bottom: 0; }
+.brief-output { margin-top: 24px; }
+.brief-output textarea { min-height: 220px; height: clamp(220px, 36dvh, 360px); margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.brief-actions { flex: none; display: grid; grid-template-columns: 1fr auto; gap: 0 16px; padding: 18px 32px 22px; border-top: 1px solid var(--rule); }
+.brief-actions .button:only-of-type { grid-column: 1 / -1; }
+.brief-actions .button:disabled { opacity: .65; }
+.brief-actions .brief-edit { font-weight: 400; justify-content: center; }
+.brief-actions .brief-status { grid-column: 1 / -1; font-size: 13px; line-height: 1.4; }
+.brief-status:not(:empty) { margin-top: 12px; }
+@media (max-width: 760px) {
+  .brief-dialog { max-width: none; width: calc(100% - 16px); max-height: calc(100dvh - 16px); }
+  .dialog-top { margin-inline: 20px; padding-block: 10px; }
+  .brief-body { padding: 24px 20px; }
+  .brief-actions { padding: 16px 20px; gap: 0 12px; }
+  .brief-actions .button { padding-inline: 14px; }
+  .form-row { grid-template-columns: 1fr; gap: 22px; }
+}
+@media (max-height: 500px) {
+  .dialog-top { padding-block: 4px; }
+  .brief-body { padding-top: 16px; }
+  .brief-actions { padding-block: 10px; }
+}
+
+/* Give the result its own reading area, without stacking a full form below it. */
+.brief-dialog[data-stage='result'] { height: min(760px, calc(100dvh - 32px)); }
+.brief-dialog[data-stage='result'] .brief-body { display: flex; flex-direction: column; flex: 1; }
+.brief-dialog[data-stage='result'] h2, .brief-dialog[data-stage='result'] #brief-intro { flex: none; }
+.brief-dialog[data-stage='result'] .brief-output { display: flex; flex-direction: column; flex: 1; min-height: 150px; }
+.brief-dialog[data-stage='result'] textarea { flex: 1; min-height: 120px; height: 0; resize: none; }
+@media (max-width: 760px) { .brief-dialog[data-stage='result'] { height: min(760px, calc(100dvh - 16px)); } }
+@media (max-height: 650px) {
+  .brief-dialog[data-stage='result'] .brief-body { padding-block: 16px; }
+  .brief-dialog[data-stage='result'] h2 { font-size: 32px; }
+  .brief-dialog[data-stage='result'] .brief-output { margin-top: 16px; }
+}

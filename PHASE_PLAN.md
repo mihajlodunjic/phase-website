@@ -1,6 +1,6 @@
 ﻿# PHASE — creative direction and implementation plan
 
-Status: faze 1 i 3 završene; PHASE Loop faze 2 dorađen. Studije, izbor, paneli i tok stranice rade lokalno bez zvuka. Desktop i mobilna emulacija provereni; fizički telefon preostaje. Audio engine nije dodat. Datum: 28. oktobar 2026.
+Status: faze 1–5 implementirane i pregledane lokalno. Proceduralni zvuk, studije i projektni brief rade; production browser provere su zabeležene. Fizički telefon, Safari/Android i screen reader ostaju za ručnu proveru. Datum: 29. oktobar 2026.
 
 ## Sadržaj
 
@@ -396,18 +396,36 @@ nisu provereni. To ostaje konkretan QA zadatak za fazu 5, zajedno sa velikim laz
 
 ### Faza 5 — završetak iskustva
 
-Osnovni brief dijalog urađen ranije da header CTA ima stvarnu lokalnu radnju. Provereni native modal, Escape/fokus, validacija, kopiranje i ručna selekcija kada clipboard nije dostupan. To ne znači da je završni polish ili QA celog planiranog proizvoda završen.
+Projektni brief ima zasebne unos/result prikaze, obavezna polja sa povezanim greškama, fokus na rezultat, povratak na sačuvane detalje i stalno dostupne Close/Generate/Copy kontrole. Native clipboard write/read je proverio stvarni tekst, a odbijena dozvola i odsutan API selektuju ceo brief za ručni copy. Nema slanja, backend-a ili lažne poruke o uspešnom slanju.
 
 - [x] Projektni brief, generisanje i kopiranje rade.
 - [x] Footer i concept credit; nema izmišljenih kontakata.
-- [ ] Finalna tipografska i responsive korekcija.
-- [ ] Izvršene provere i zapisani rezultati i ograničenja.
+- [x] Finalna tipografska i responsive korekcija.
+- [x] Izvršene provere i zapisani rezultati i ograničenja.
 
-Dokaz: lokalna production verzija spremna za korisnikov pregled. Bez objave i udaljenih Git operacija.
+Dokaz: prošli typecheck, production build i 45 unit testova. Novi production
+fixture-i: `qa/phase5-checks.js`, `qa/phase5-access-checks.js` i
+`qa/phase5-performance-checks.js`. Ponovljeni scene/studies/audio-state fixture-i
+i prirodni krajevi sva četiri score-a. Pregledani 1440×900, 1280×720, 768×1024,
+390×844, 320×568 i reflow 640×360, plus Chrome touch emulacija 390 px / DPR3.
+
+Sačuvani originalni karakter, sistemski fontovi i srebrna forma. Sitne oznake su
+najmanje 12 px; footer ima prave anchor linkove, mobilni meni otvara i brief;
+kratki desktop hero zadržava CTA u prvom ekranu. Fiksni audio player ne prekriva
+proverene fokusirane kontrole. Zajednički activity observer pauzira WebGL i
+pozadinske SVG motive iza modala; modalni motiv može da radi.
+
+Merenja i ograničenja su u `QA.md`. GPU draw p50 ~3.68 ms desktop / 1.79 ms u
+mobilnoj emulaciji na Intel UHD 620; ukupni RAF p95 ~24.7 / 26.1 ms. Startup long
+tasks i veliki lazy Three chunk ostaju otvoreni, cilj 60 fps nije potvrđen.
+Fizički telefoni, Safari/Android, pravi OS background/BFCache, screen reader i
+slušanje na stvarnom izlazu nisu zamenjeni desktop emulacijom. Lokalna verzija je
+spremna za korisnikov pregled; nije objavljena, commitovana niti pushovana.
 
 ## 10. Završni kriterijumi
 
 PHASE je uspešan kada se pamti kao jedinstven studio za zvuk, glavni vizual ima autorsku formu, tri studije pružaju stvarnu interakciju, a ceo sajt ostaje čitljiv i upotrebljiv na telefonu i bez audio/WebGL podrške.
 
 Ne završavati na lepom hero-u sa nedovršenim ostatkom stranice. Ne prikrivati loše materijale prejakim bloom-om. Ne proglašavati procedurally generated demo zvuk završenim klijentskim radom. Ne tvrditi da su QA i performanse potvrđeni ako nisu zaista provereni.
+
 

@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+﻿import { useRef } from 'react'
 import { Header } from '../components/Header'
 import { ProjectBrief } from '../components/ProjectBrief'
 import { PhaseCanvas } from '../scene/PhaseCanvas'
@@ -15,13 +15,19 @@ export function App() {
   const motion = useMotionPreference()
   const { engine } = useAudio()
   const brief = useRef<HTMLDialogElement>(null)
-  const openBrief = () => { engine.stop('brief'); brief.current?.showModal() }
+  const briefOpener = useRef<HTMLElement | null>(null)
+  const openBrief = () => { briefOpener.current = document.activeElement as HTMLElement; engine.stop('brief'); brief.current?.showModal() }
 
   return (
-    <div id="top" data-motion={motion.enabled ? 'on' : 'off'}>
+    <div id="top" tabIndex={-1} onClick={event => {
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return
+      const link = (event.target as Element).closest<HTMLAnchorElement>('a[href^="#"]')
+      const target = link?.getAttribute('href')?.slice(1)
+      if (target) requestAnimationFrame(() => document.getElementById(target)?.focus({ preventScroll: true }))
+    }} data-motion={motion.enabled ? 'on' : 'off'}>
       <a className="skip-link" href="#main">Skip to content</a>
       <Header onStartProject={openBrief} />
-      <main id="main">
+      <main id="main" tabIndex={-1}>
         <section className="hero page-width" aria-labelledby="hero-title">
           <div className="hero-copy">
             <h1 id="hero-title"><span>SOUND,</span><span>MADE</span><span>VISIBLE.</span></h1>
@@ -43,10 +49,11 @@ export function App() {
         <Studio />
         <section className="contact page-width section-space" aria-labelledby="contact-title"><h2 id="contact-title">What should your<br />brand sound like?</h2><button className="button button-accent" onClick={openBrief}>Start a project <span aria-hidden="true">↗</span></button></section>
       </main>
-      <footer className="footer page-width"><a className="wordmark" href="#top" aria-label="PHASE home">PHASE/</a><p>Independent studio concept.<br />Design &amp; development by Mihajlo Dunjić.</p><a href="#top">Back to top ↑</a></footer>
-      <ProjectBrief dialogRef={brief} />
+      <footer className="footer page-width"><a className="wordmark" href="#top" aria-label="PHASE home">PHASE<span>/</span></a><nav aria-label="Footer navigation"><a href="#work">Work</a><a href="#approach">Approach</a><a href="#studio">Studio</a><a href="#top">Back to top <span aria-hidden="true">↑</span></a></nav><p>Independent studio concept.<br />Design &amp; development by Mihajlo Dunjić.</p></footer>
+      <ProjectBrief dialogRef={brief} onClose={() => briefOpener.current?.focus({ preventScroll: true })} />
       <GlobalAudioPlayer />
       <AudioDiagnostics />
     </div>
   )
 }
+

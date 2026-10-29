@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+﻿import { useEffect, useRef, useState } from 'react'
 import { SoundToggle } from './AudioControls'
 
 type Props = { onStartProject: () => void }
@@ -43,6 +43,7 @@ export function Header({ onStartProject }: Props) {
       <a href="#work" onClick={() => navigate('#work')}>Work</a>
       <a href="#approach" onClick={() => navigate('#approach')}>Approach</a>
       <a href="#studio" onClick={() => navigate('#studio')}>Studio</a>
+      <button className="nav-project" onClick={() => { setOpen(false); menuButton.current?.focus(); onStartProject() }}>Start a project <span aria-hidden="true">↗</span></button>
     </nav>
     <div className="header-actions">
       <SoundToggle />
@@ -51,3 +52,4 @@ export function Header({ onStartProject }: Props) {
     </div>
   </header>
 }
+

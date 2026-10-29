@@ -1,6 +1,7 @@
-import { Component, lazy, Suspense, useEffect, useRef, useState } from 'react'
+﻿import { Component, lazy, Suspense, useEffect, useRef, useState } from 'react'
 import type { ErrorInfo, ReactNode } from 'react'
 import { useAudio } from '../audio/AudioProvider'
+import { useVisualActivity } from '../hooks/useVisualActivity'
 import { LoopFallback } from './LoopFallback'
 
 const Scene = lazy(() => import('./Scene'))
@@ -16,20 +17,12 @@ export function PhaseCanvas({ motion }: { motion: boolean }) {
   const { engine } = useAudio()
   const host = useRef<HTMLDivElement>(null)
   const inputs = useRef({ pointerX: 0, pointerY: 0, scroll: 0, audio: engine.energy })
-  const [active, setActive] = useState(() => !document.hidden)
+  const active = useVisualActivity(host, true)
   const [failed, setFailed] = useState(false)
 
   useEffect(() => {
     const element = host.current
     if (!element) return
-    let visible = false
-    const update = () => setActive(visible && !document.hidden)
-    const observer = new IntersectionObserver(entries => {
-      visible = entries[0].isIntersecting
-      update()
-    }, { threshold: 0 })
-    observer.observe(element)
-    document.addEventListener('visibilitychange', update)
     const scroll = () => {
       const hero = element.closest('section')
       if (hero) inputs.current.scroll = -hero.getBoundingClientRect().top / hero.offsetHeight
@@ -40,9 +33,7 @@ export function PhaseCanvas({ motion }: { motion: boolean }) {
     window.addEventListener('scroll', scroll, { passive: true })
     scroll()
     return () => {
-      observer.disconnect()
       resize.disconnect()
-      document.removeEventListener('visibilitychange', update)
       window.removeEventListener('scroll', scroll)
     }
   }, [])
@@ -69,3 +60,5 @@ export function PhaseCanvas({ motion }: { motion: boolean }) {
     </div>
   )
 }
+
+
