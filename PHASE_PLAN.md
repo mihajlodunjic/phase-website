@@ -1,4 +1,4 @@
-# PHASE — creative direction and implementation plan
+﻿# PHASE — creative direction and implementation plan
 
 Status: faze 1 i 3 završene; PHASE Loop faze 2 dorađen. Studije, izbor, paneli i tok stranice rade lokalno bez zvuka. Desktop i mobilna emulacija provereni; fizički telefon preostaje. Audio engine nije dodat. Datum: 28. oktobar 2026.
 
@@ -373,12 +373,26 @@ telefon, screen reader i Safari/Android provera. Rezultati i ograničenja: `QA.m
 
 ### Faza 4 — zvuk i povezivanje
 
-- [ ] Jedan audio engine; originalni kratki synth primeri.
-- [ ] Play/stop, volume, kraj studije i zamena aktivne studije.
-- [ ] Stvarno audio-reaktivno mapiranje sa ograničenim intenzitetom.
-- [ ] Background ponašanje i čišćenje resursa.
+- [x] Jedan audio engine; originalni kratki synth primeri.
+- [x] Play/stop, volume, kraj studije i zamena aktivne studije.
+- [x] Stvarno audio-reaktivno mapiranje sa ograničenim intenzitetom.
+- [x] Background ponašanje i čišćenje resursa.
 
-Dokaz: svaka studija ima različit karakter; nema automatskog zvuka, preklapanja i naglih skokova glasnoće.
+Dokaz: implementirani PHASE 4 s, FORM 8 s, ECHO 9 s i AFTERIMAGE 12 s, bez fajlova,
+mikrofona i autoplay-a. Jedan kontekst nastaje na eksplicitni klik; zamena studije
+čeka fade/dispose prethodne. Stvarni post-volume analyser vodi ograničene vizuale;
+idle ima nultu audio energiju. Motion off/reduced motion ostavlja stabilnu formu.
+
+Prošli typecheck, production build i 43 unit testa, pet novih audio browser fixture-a
+i ponovljene scene/studies regresije. Sačekani prirodni krajevi sva četiri score-a.
+Pravi OfflineAudioContext proverava sample-ove i fade/tail; ništa nije snimljeno u
+medijske fajlove. Posle 15 ciklusa jedan kontekst, najviše jedna voice, četiri
+zajednička čvora u mirovanju. Kontrole pregledane na 1440, 390 i 320 px.
+
+Hidden/return, interrupted i BFCache event putevi su provereni simulacijom; fizički
+OS lifecycle, iOS Safari/Android, screen reader i slušanje na stvarnom izlazu još
+nisu provereni. To ostaje konkretan QA zadatak za fazu 5, zajedno sa velikim lazy
+3D chunk-om. Merenja, dokazi i granice: `QA.md`, `qa/audio-*.js`.
 
 ### Faza 5 — završetak iskustva
 
@@ -396,3 +410,4 @@ Dokaz: lokalna production verzija spremna za korisnikov pregled. Bez objave i ud
 PHASE je uspešan kada se pamti kao jedinstven studio za zvuk, glavni vizual ima autorsku formu, tri studije pružaju stvarnu interakciju, a ceo sajt ostaje čitljiv i upotrebljiv na telefonu i bez audio/WebGL podrške.
 
 Ne završavati na lepom hero-u sa nedovršenim ostatkom stranice. Ne prikrivati loše materijale prejakim bloom-om. Ne proglašavati procedurally generated demo zvuk završenim klijentskim radom. Ne tvrditi da su QA i performanse potvrđeni ako nisu zaista provereni.
+

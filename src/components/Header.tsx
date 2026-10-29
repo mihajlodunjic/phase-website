@@ -1,4 +1,5 @@
-﻿import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { SoundToggle } from './AudioControls'
 
 type Props = { onStartProject: () => void }
 
@@ -44,7 +45,7 @@ export function Header({ onStartProject }: Props) {
       <a href="#studio" onClick={() => navigate('#studio')}>Studio</a>
     </nav>
     <div className="header-actions">
-      <span className="sound-status"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 8h3l4-4v12l-4-4H3zM14 7l5 6m0-6-5 6" /></svg>Sound off</span>
+      <SoundToggle />
       <button className="project-link" onClick={onStartProject}>Start a project <span aria-hidden="true">↗</span></button>
       <button ref={menuButton} className="menu-toggle" aria-expanded={open} aria-controls="primary-nav" onClick={() => setOpen(value => !value)}>{open ? 'Close' : 'Menu'}<span aria-hidden="true">{open ? '−' : '+'}</span></button>
     </div>

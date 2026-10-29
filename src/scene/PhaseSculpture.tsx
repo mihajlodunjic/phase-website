@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { RefObject } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import { Group } from 'three'
@@ -51,6 +51,7 @@ function LoopSurface({ motion, active, host, shaderFallback, compact, pivot, con
     pivot.current.scale.setScalar(pose.scale)
     resources.uniforms.uBreath.value = pose.breath
     resources.uniforms.uTwist.value = pose.twist
+    resources.material.envMapIntensity = pose.shine
     if (motion && active) state.invalidate()
   })
 

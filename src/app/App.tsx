@@ -7,12 +7,15 @@ import { Statement } from '../sections/Statement'
 import { Studies } from '../sections/Studies'
 import { Approach } from '../sections/Approach'
 import { Studio } from '../sections/Studio'
+import { useAudio } from '../audio/AudioProvider'
+import { AudioDiagnostics, AudioPlayButton, GlobalAudioPlayer } from '../components/AudioControls'
 import { MotionControl } from '../components/MotionControl'
 
 export function App() {
   const motion = useMotionPreference()
+  const { engine } = useAudio()
   const brief = useRef<HTMLDialogElement>(null)
-  const openBrief = () => brief.current?.showModal()
+  const openBrief = () => { engine.stop('brief'); brief.current?.showModal() }
 
   return (
     <div id="top" data-motion={motion.enabled ? 'on' : 'off'}>
@@ -23,7 +26,7 @@ export function App() {
           <div className="hero-copy">
             <h1 id="hero-title"><span>SOUND,</span><span>MADE</span><span>VISIBLE.</span></h1>
             <p className="hero-description">We shape how brands are heard. Sonic identities, product sounds and original compositions with a character of their own.</p>
-            <a className="button button-accent explore" href="#work">Explore the studies <svg aria-hidden="true" viewBox="0 0 20 20"><path d="M10 3v13m-5-5 5 5 5-5" /></svg></a>
+            <div className="hero-actions"><a className="button button-accent explore" href="#work">Explore the studies <svg aria-hidden="true" viewBox="0 0 20 20"><path d="M10 3v13m-5-5 5 5 5-5" /></svg></a><AudioPlayButton id="phase" hero /></div>
           </div>
           <div className="hero-art">
             <PhaseCanvas motion={motion.enabled} />
@@ -42,6 +45,8 @@ export function App() {
       </main>
       <footer className="footer page-width"><a className="wordmark" href="#top" aria-label="PHASE home">PHASE/</a><p>Independent studio concept.<br />Design &amp; development by Mihajlo Dunjić.</p><a href="#top">Back to top ↑</a></footer>
       <ProjectBrief dialogRef={brief} />
+      <GlobalAudioPlayer />
+      <AudioDiagnostics />
     </div>
   )
 }

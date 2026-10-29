@@ -88,7 +88,7 @@ async (page) => {
     const ended = await visual.getAttribute('data-frames')
     await test.evaluate(async () => { for (let i = 0; i < 12; i++) await new Promise(requestAnimationFrame) })
     assert(ended === await visual.getAttribute('data-frames'), 'Finite study still rendering')
-    const background = await test.locator('.study-entry svg').evaluateAll(elements => elements.every(element => element.dataset.running === 'false'))
+    const background = await test.locator('.study-entry svg.study-visual').evaluateAll(elements => elements.every(element => element.dataset.running === 'false'))
     assert(background, 'Background study motion not paused')
     await test.getByRole('button', { name: 'Replay motion' }).click()
     await test.waitForFunction(() => document.querySelector('.study-panel:not([hidden]) svg').dataset.running === 'true')
@@ -121,3 +121,4 @@ async (page) => {
   } finally { await unsupported.close() }
   return results
 }
+

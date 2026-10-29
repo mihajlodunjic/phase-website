@@ -1,5 +1,6 @@
 import { Component, lazy, Suspense, useEffect, useRef, useState } from 'react'
 import type { ErrorInfo, ReactNode } from 'react'
+import { useAudio } from '../audio/AudioProvider'
 import { LoopFallback } from './LoopFallback'
 
 const Scene = lazy(() => import('./Scene'))
@@ -12,8 +13,9 @@ class SceneBoundary extends Component<{ children: ReactNode; onFailure: () => vo
 }
 
 export function PhaseCanvas({ motion }: { motion: boolean }) {
+  const { engine } = useAudio()
   const host = useRef<HTMLDivElement>(null)
-  const inputs = useRef({ pointerX: 0, pointerY: 0, scroll: 0 })
+  const inputs = useRef({ pointerX: 0, pointerY: 0, scroll: 0, audio: engine.energy })
   const [active, setActive] = useState(() => !document.hidden)
   const [failed, setFailed] = useState(false)
 

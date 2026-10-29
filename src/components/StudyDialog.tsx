@@ -4,11 +4,15 @@ import { studies } from '../data/content'
 import { trapModalTab } from '../lib/modalFocus'
 import { studyForKey } from '../lib/studySelection'
 import { StudyVisual } from '../visuals/StudyVisual'
+import { useAudio } from '../audio/AudioProvider'
+import { PanelAudioControls } from './AudioControls'
 import { MotionControl } from './MotionControl'
 import type { MotionSettings } from './MotionControl'
 
 type Props = { selected: StudyId; open: boolean; motion: MotionSettings; onSelect: (id: StudyId) => void; onClose: () => void }
 export function StudyDialog({ selected, open, motion, onSelect, onClose }: Props) {
+  const { snapshot } = useAudio()
+  const audioPlaying = snapshot.status === 'playing' && snapshot.activeId === selected
   const dialog = useRef<HTMLDialogElement>(null)
   const tabs = useRef<Partial<Record<StudyId, HTMLButtonElement | null>>>({})
   const [replay, setReplay] = useState(0)
@@ -28,12 +32,13 @@ export function StudyDialog({ selected, open, motion, onSelect, onClose }: Props
     {studies.map(study => <div key={study.id} role="tabpanel" id={`study-panel-${study.id}`} aria-labelledby={`study-tab-${study.id}`} hidden={selected !== study.id} tabIndex={0} className="study-panel">
       <div className="panel-visual">{open && selected === study.id && <StudyVisual key={study.id} kind={study.id} motion={motion.enabled} sequence replay={replay} />}</div>
       <div className="panel-copy"><p className="study-field">{study.field}</p><h2 id={`study-title-${study.id}`}>{study.name}</h2><p className="study-description">{study.description}</p><p>{study.concept}</p><p className="visual-description">{study.visualDescription}</p>
-        <div className="study-panel-controls"><button className="button" disabled={!motion.enabled} onClick={event => {
+
+        <div className="study-panel-controls"><button className="button" disabled={!motion.enabled || audioPlaying} onClick={event => {
           setReplay(value => value + 1)
           event.currentTarget.closest('[role=tabpanel]')?.querySelector('.panel-visual')?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
-        }}>Replay motion <span aria-hidden="true">↻</span></button><span className="panel-sound-status">Sound off</span></div>
+        }}>Replay motion <span aria-hidden="true">↻</span></button><span className="panel-sound-status">Visual only</span></div>
       </div>
     </div>)}
-    <div className="study-dialog-bottom"><span>Sound, made visible.</span><MotionControl motion={motion} context="in study" /></div>
+    <div className="study-dialog-bottom"><PanelAudioControls id={selected} /><MotionControl motion={motion} context="in study" /></div>
   </dialog>
 }

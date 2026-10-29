@@ -1,4 +1,5 @@
 import { Euler, Quaternion } from 'three'
+import type { AudioEnergy } from '../audio/types'
 
 export const MAX_TILT = 7 * Math.PI / 180
 export const IDLE_PERIOD = 18
@@ -7,11 +8,11 @@ export const MAX_TWIST = 0.018
 const TAU = Math.PI * 2
 
 export const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, Number.isFinite(value) ? value : 0))
-export type SceneInputs = { pointerX: number; pointerY: number; scroll: number }
-export type ScenePose = { x: number; y: number; z: number; lift: number; retreat: number; scale: number; breath: number; twist: number }
+export type SceneInputs = { pointerX: number; pointerY: number; scroll: number; audio?: AudioEnergy }
+export type ScenePose = { x: number; y: number; z: number; lift: number; retreat: number; scale: number; breath: number; twist: number; shine: number }
 export type SceneOptions = { motion: boolean; active: boolean; compact: boolean }
 
-export const neutralPose = (): ScenePose => ({ x: 0, y: 0, z: 0, lift: 0, retreat: 0, scale: 1, breath: 0, twist: 0 })
+export const neutralPose = (): ScenePose => ({ x: 0, y: 0, z: 0, lift: 0, retreat: 0, scale: 1, breath: 0, twist: 0, shine: 1 })
 
 // Targets only. Every channel, including shader deformation, has a finite budget.
 export function mapScenePose(input: SceneInputs, time: number, motion: boolean, out: ScenePose, compact = false): ScenePose {
@@ -35,6 +36,12 @@ export function mapScenePose(input: SceneInputs, time: number, motion: boolean, 
   out.scale = 1 - scroll * (compact ? 0.025 : 0.045)
   out.breath = Math.sin(cycle - 0.5) * MAX_BREATH * intensity
   out.twist = Math.sin(cycle + 0.3) * MAX_TWIST * intensity
+  out.shine = 1
+  if (input.audio?.playing) {
+    out.breath = clamp(out.breath + clamp(input.audio.bass, 0, 1) * 0.012 * intensity, -0.021, 0.021)
+    out.twist = clamp(out.twist + clamp(input.audio.mid, 0, 1) * 0.022 * intensity, -0.04, 0.04)
+    out.shine = 1 + clamp(input.audio.high, 0, 1) * 0.12 * intensity
+  }
   return out
 }
 
@@ -75,6 +82,7 @@ export function createSceneController(inputs: SceneInputs) {
       pose.scale = damp(pose.scale, target.scale, delta)
       pose.breath = damp(pose.breath, target.breath, delta)
       pose.twist = damp(pose.twist, target.twist, delta)
+      pose.shine = damp(pose.shine, target.shine, delta)
       return pose
     },
   }

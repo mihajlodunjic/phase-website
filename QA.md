@@ -246,3 +246,119 @@ warning i Vite chunk-size upozorenje ostaju. Mreža sadrži lokalni JS/CSS i SVG
 favicon; nema novih zavisnosti ili udaljenih medija. Još nisu provereni fizički
 telefon, Safari/Android i screen reader; sistemske fontove treba pregledati na
 njihovim stvarnim OS-ovima. Sledeća funkcionalna faza je Web Audio engine.
+
+## Faza 4 — proceduralni audio (2026-10-28)
+
+### Implementacija i automatske provere
+
+- Bez novih zavisnosti. Postojeće verzije/peer dependencies ostaju iste.
+- `npm.cmd run typecheck`, `npm.cmd test` i `npm.cmd run build` prolaze.
+  **43 unit testa / 8 fajlova**: dodati lifecycle/consent/cancellation, serijska
+  zamena jedne voice, završetak, hidden/interruption, Strict Mode cleanup,
+  gain ramp/clamp, konačni score, stvarni RMS/band separation i bounded mapping.
+- Production preview je na 4173, dev na 5173. Svi browser fixture-i su izvršeni
+  protiv production build-a, osim source-level offline signal fixture-a na dev-u.
+- Prošli `qa/audio-checks.js`, `qa/audio-endings-checks.js`,
+  `qa/audio-edge-checks.js`, `qa/audio-signal-checks.js` i `qa/audio-load-checks.js`.
+- Ponovljeni `qa/studies-checks.js` i `qa/scene-checks.js` prolaze. Selector za
+  pozadinske SVG motive je preciziran jer Play dugmad sada takođe imaju SVG ikone.
+
+### Stvarni browser audio i UI
+
+Chrome 155 / Windows, 1440×900, sa postojećim sistemskim fontovima:
+
+- Početno učitavanje i visual-only izbori: **0 AudioContexts, 0 voices**.
+- Enable sound: jedan kontekst, ready, bez zvuka. Play i svi naredni startovi
+  ponovo koriste taj kontekst. Default volume 20%.
+- FORM → mute preko Home → 100% preko End → ECHO: stvarni RMS prvo >0,
+  zatim RMS/bass/mid/high =0 pri volume 0, pa opet >0. Najviše jedna aktivna voice.
+- Stop, zamena studije, izbor drugog taba, otvaranje briefa i Turn sound off
+  prekidaju zvuk. Posle fade-a ostaju četiri zajednička graph čvora, bez voice-a.
+- Stop dok je resume promise odložen sprečava kasni start. Odbijeni resume
+  prikazuje error i dozvoljava novi eksplicitni pokušaj u istom kontekstu.
+- Spoljni `context.suspend()` izaziva interrupted stanje; novi Play radi.
+- Simulirani `document.hidden`/visibilitychange zaustavlja zvuk i suspenduje
+  kontekst. Vraćanje taba ne nastavlja reprodukciju. Novi Play koristi isti kontekst.
+- Simulirani persisted pagehide/pageshow (BFCache) ostavlja stopped stanje;
+  novi Play radi. Finalni pagehide zatvara kontekst. Unit test proverava i
+  finalni provider detach: 0 owned nodes/voices, jedan close, bez Strict Mode curenja.
+- Escape zatvara study panel dok zvuk nastavlja; globalni Stop tada ostaje vidljiv.
+  Promena taba sama ne pokreće sledeći zvuk. Replay motion se isključuje tokom
+  audio vođenog motiva, da dva vremena ne upravljaju istom formom.
+- Reduced motion: audio radi, SVG ostaje stabilan i frame brojač ne raste.
+  Bez WebGL-a audio radi uz SVG fallback. Bez AudioContext podrške Play je
+  disabled i vizuelni sadržaj/paneli ostaju upotrebljivi.
+- Play/Stop, volume i status pregledani na 1440, 390×844 i 320×568. Nema
+  horizontalnog preliva. Kontrole u fiksnom footer-u dijaloga ostaju u ekranu;
+  sadržaj panela se skroluje posebno. Fokus ostaje u modalu.
+- Screenshot dokazi: `phase4-player-{1440,390,320}.png`,
+  `phase4-panel-{1440,390,320}.png`, `phase4-audio-hero.png` u `artifacts/qa/`.
+- Normalni audio prolaz: 0 page errors. Fallback fixture namerno izaziva
+  WebGL grešku; prethodno poznati Three/Fiber Clock warning ostaje.
+
+### Završetak i sintetisani signal
+
+Real-time prirodan završetak je sačekan za sva četiri score-a, bez preskakanja
+vremena: PHASE 4 s, FORM 8 s, ECHO 9 s, AFTERIMAGE 12 s. Svaki je završio kao
+stopped/ended, progress=duration, 0 voices, 4 zajednička čvora, sva energija 0.
+Wall vreme uključuje Playwright klik/skrol/polling i nije audio timing merenje.
+Audio-time completion određuje kraj, bez intervala koji bi petljao studiju.
+
+OfflineAudioContext, mono 48 kHz, volume 100%, sa istim synth/routing kodom:
+
+| Score | Peak (linear) | RMS celog rendera | Peak posle kraja |
+| --- | ---: | ---: | ---: |
+| PHASE 4 s | 0.09828 | 0.01639 | 0 |
+| FORM 8 s | 0.09828 | 0.01571 | 0 |
+| ECHO 9 s | 0.09506 | 0.00722 | 0 |
+| AFTERIMAGE 12 s | 0.08507 | 0.01350 | 0 |
+
+Provereni su konačnost svakog sample-a, različite score strukture i nulti tail.
+Dodatni offline renderi za sva četiri score-a sa zakazanim Stop/fade usred fraze
+imaju nulti izlaz posle fade/tail granice. Nema snimljenih audio fajlova.
+Live browser najviši zabeleženi peak pri brzom volume/switch testu bio je ~0.1705,
+a pri punim studijama na podrazumevanih 20% ~0.01966. Različiti real-time graf
+history/kompresor i uzorkovanje znače da to nije identično offline peak-u.
+
+Ovo potvrđuje signal, granice i state/lifecycle, **ne subjektivan kvalitet zvuka**
+na slušalicama ili zvučnicima. Takvo slušanje nije izvršeno preko ovog alata.
+
+### Opterećenje
+
+Isto okruženje, 1440×900 / DPR1, spremna scena + 30 warm-up RAF-ova. Instrumentisani
+uzorci po 120 page RAF intervala, sa čitanjem energije/poze svakog frame-a:
+
+| Stanje | p50 | p95 | max | Long tasks |
+| --- | ---: | ---: | ---: | ---: |
+| Idle | 23.6 ms | 25.8 ms | 29.6 ms | 0 |
+| FORM playing | 23.9 ms | 25.9 ms | 26.3 ms | 0 |
+
+Ovi page RAF intervali sa instrumentacijom nisu GPU frame time i nisu direktno
+uporedivi sa ranijim jednostavnijim fixture-om. Ne predstavljaju potvrdu FPS cilja.
+Idle max audio energy =0; playing max ~0.1858. Izmereni playing pose u granicama:
+max breath ~0.00917, twist ~0.01688, shine ~1.0000003 za tonalni FORM uzorak.
+Unit testovi proveravaju i zasićene ulaze do ukupnih ±0.021/±0.04/+12% granica.
+
+Posle **15** start/stop ciklusa: contexts=1, maxVoices=1, activeVoices=0,
+ownedNodes=4 u svakom mirovanju. Hero renderer ostaje 1 geometry / 2 textures /
+1 program, 1 draw call, 23,296 triangles. Audio graph ima 4 zajednička čvora;
+aktivna voice dodaje PHASE 10, FORM 16, ECHO 58 ili AFTERIMAGE 26, koji se
+odspajaju pri završetku/Stop. Native browser internu GC/GPU memoriju ovo ne meri.
+
+Build: glavni JS ~267.32 kB / 83.84 kB gzip; CSS 22.64 kB / 5.28 kB gzip;
+lazy Three scena 922.11 kB / 245.65 kB gzip. Vite chunk-size warning ostaje.
+Nema mrežnog audio sadržaja, remote fontova, sampled fajlova ili mikrofon API-ja.
+
+### Preostala ograničenja
+
+Pravi OS background/tab i BFCache lifecycle nisu dokazani simulacijom događaja;
+fizički telefon (posebno iOS Safari audio activation/interruption), Android,
+slušanje zvuka na stvarnom izlazu i screen reader ostaju za ručni pregled.
+Faza 5 treba da obuhvati završni polish i ove ciljne uređaje. Nijedan performance
+cilj na mobilnom GPU-u nije proglašen potvrđenim. Rad nije objavljen.
+
+Dodatna touch provera faze 4: Chrome emulacija 390×844 / DPR3, tap Play PHASE →
+Turn sound off daje off/0 voices/4 nodes/1 context. Sledeći Enable sound daje
+ready/0 voices u istom kontekstu, bez autoplay-a. Tap Play/Stop AFTERIMAGE u
+panelu radi. Zabeleženo 0 page/console errors i 5 lokalnih resource URL-ova,
+bez udaljenih zahteva. Ovo je emulacija, ne fizički telefon.

@@ -1,4 +1,6 @@
 import { useEffect, useId, useRef } from 'react'
+import { useAudio } from '../audio/AudioProvider'
+import { audioMatches, mapAudioStudy } from './audioMapping'
 import type { StudyId } from '../data/content'
 import { useVisualActivity } from '../hooks/useVisualActivity'
 import { createAfterimageBands, createFormRings, echoNodes, echoPaths } from './studyGeometry'
@@ -27,6 +29,8 @@ export function FormPaths({ id }: { id: string }) {
 type Props = { kind: StudyId; motion: boolean; active?: boolean; sequence?: boolean; replay?: number }
 export function StudyVisual({ kind, motion, active = true, sequence = false, replay = 0 }: Props) {
   const id = `metal-${useId().replace(/:/g, '')}`
+  const { engine, snapshot } = useAudio()
+  const audioPlaying = snapshot.status === 'playing' && (snapshot.activeId === kind || kind === 'form' && snapshot.activeId === 'phase')
   const root = useRef<SVGSVGElement>(null)
   const elapsed = useRef(0)
   const frames = useRef(0)
@@ -44,6 +48,7 @@ export function StudyVisual({ kind, motion, active = true, sequence = false, rep
     const pose = { compression: 0, signal: 0, drift: 0, wave: 0 }
     const paint = () => {
       mapStudyMotion(kind, elapsed.current, sequence, pose)
+      if (audioPlaying && audioMatches(kind, engine.energy)) mapAudioStudy(kind, engine.energy, pose)
       if (!motion) { pose.compression = 0; pose.signal = 3.5; pose.drift = 0; pose.wave = 0 }
       for (let i = 0; i < rings.length; i++) {
         const weight = 0.18 + (rings.length - i - 1) / Math.max(1, rings.length - 1) * 0.67
@@ -51,32 +56,32 @@ export function StudyVisual({ kind, motion, active = true, sequence = false, rep
         rings[i].setAttribute('transform', `translate(360 240) scale(${scale}) translate(-360 -240)`)
       }
       for (let i = 0; i < nodes.length; i++) {
-        const intensity = Math.exp(-Math.pow((i - pose.signal) / 0.8, 2))
+        const intensity = Math.exp(-Math.pow((i - pose.signal) / 0.8, 2)) * (audioPlaying ? Math.min(1, engine.energy.level * 2.5 + engine.energy.high) : 1)
         nodes[i].setAttribute('opacity', String(0.42 + intensity * 0.58))
         nodes[i].setAttribute('r', String(4.5 + intensity * 3.5))
       }
       for (let i = 0; i < bands.length; i++) {
-        const shift = pose.drift + Math.sin(i * 0.3 + elapsed.current * 0.6) * pose.wave * 3
+        const shift = pose.drift + Math.sin(i * 0.3 + (audioPlaying ? engine.energy.elapsed : elapsed.current) * 0.6) * pose.wave * 3
         bands[i].setAttribute('transform', `translate(0 ${shift})`)
       }
-      trails?.setAttribute('opacity', String(0.17 + Math.abs(pose.wave) * 0.16))
-      if (inspect) { element.dataset.frames = String(++frames.current); element.dataset.elapsed = String(elapsed.current) }
+      trails?.setAttribute('opacity', String(0.17 + Math.abs(pose.wave) * 0.16 + (audioPlaying ? engine.energy.high * 0.15 : 0)))
+      if (inspect) { element.dataset.frames = String(++frames.current); element.dataset.elapsed = String(elapsed.current); element.dataset.audioEnergy = String(engine.energy.level) }
     }
     if (!motion) elapsed.current = 0
     paint()
     element.dataset.running = 'false'
-    if (!running || sequence && elapsed.current >= studyDuration(kind)) return
+    if (!running || sequence && !audioPlaying && elapsed.current >= studyDuration(kind)) return
     element.dataset.running = 'true'
     let unsubscribe = () => {}
     unsubscribe = subscribeVisualFrame(delta => {
       elapsed.current += delta
       paint()
-      if (sequence && elapsed.current >= studyDuration(kind)) { unsubscribe(); element.dataset.running = 'false' }
+      if (sequence && !audioPlaying && elapsed.current >= studyDuration(kind)) { unsubscribe(); element.dataset.running = 'false' }
     })
     return () => { unsubscribe(); element.dataset.running = 'false' }
-  }, [kind, motion, running, sequence, replay, inspect])
+  }, [kind, motion, running, sequence, replay, inspect, audioPlaying, engine])
 
-  return <svg ref={root} className={`study-visual motif-${kind}`} data-motif={kind} viewBox="0 0 720 480" fill="none" aria-hidden="true" focusable="false">
+  return <svg ref={root} className={`study-visual motif-${kind}`} data-motif={kind} data-audio-reactive={audioPlaying && motion} viewBox="0 0 720 480" fill="none" aria-hidden="true" focusable="false">
     <MetalDefinitions id={id} />
     {kind === 'form' && <FormPaths id={id} />}
     {kind === 'echo' && <>
