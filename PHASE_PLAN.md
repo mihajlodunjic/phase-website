@@ -422,10 +422,24 @@ Fizički telefoni, Safari/Android, pravi OS background/BFCache, screen reader i
 slušanje na stvarnom izlazu nisu zamenjeni desktop emulacijom. Lokalna verzija je
 spremna za korisnikov pregled; nije objavljena, commitovana niti pushovana.
 
+### Lokalna revizija posle faze 5 — 29.10.2026.
+
+- [x] Sound off vraća fokus umesto prelaska na BODY i početak tab redosleda.
+- [x] Native i Arial display fallback ne stvaraju horizontalni scroll na 320 px.
+- [x] Oznaka motiva odgovara stvarnom playback/motion stanju.
+- [x] Pending audio poruke imaju ispravan Unicode tekst; regresije su dodate.
+
+Dokaz: `REVIEW.md`, `qa/review-checks.js`, 46 unit testova i ponovljene relevantne
+production browser provere. Pregledane su stvarne slike 1440/390/320 px i
+prikazi sa zamenskim fontom. Sačuvani su smer, sadržaj i postojeći proceduralni
+vizuali. Startup long tasks, veliki 3D chunk i neprovereni fizički uređaji ostaju
+jasno navedena ograničenja; ne tvrdi se stabilnih 60 fps ili WCAG certifikacija.
+
 ## 10. Završni kriterijumi
 
 PHASE je uspešan kada se pamti kao jedinstven studio za zvuk, glavni vizual ima autorsku formu, tri studije pružaju stvarnu interakciju, a ceo sajt ostaje čitljiv i upotrebljiv na telefonu i bez audio/WebGL podrške.
 
 Ne završavati na lepom hero-u sa nedovršenim ostatkom stranice. Ne prikrivati loše materijale prejakim bloom-om. Ne proglašavati procedurally generated demo zvuk završenim klijentskim radom. Ne tvrditi da su QA i performanse potvrđeni ako nisu zaista provereni.
+
 
 

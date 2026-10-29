@@ -1,4 +1,4 @@
-.work-intro { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+﻿.work-intro { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
 .work-intro .motion-control { padding-left: 0; }
 .study-entry { min-width: 0; }
 .study-entry h3 { margin-block: 12px 22px; font-family: var(--display); font-weight: 400; font-size: clamp(64px, 6.5vw, 96px); line-height: 1; letter-spacing: -.025em; }
@@ -111,6 +111,9 @@
   .work .section-heading { flex-direction: column; align-items: start; }
   .work-intro { flex-direction: row; align-items: center; width: 100%; justify-content: space-between; }
   .study-form .study-copy { padding: 20px; }
+  .study-form .study-copy h3 { font-size: 70px; }
+  .study-afterimage h3 { font-size: 38px; }
+  .study-open-mark { margin-left: 10px; }
   .study-entry-bottom { gap: 14px; }
   .study-view { gap: 16px; }
   .study-art, .study-form .study-art { height: 230px; }
@@ -124,3 +127,4 @@
 section[tabindex='-1']:focus-visible { outline: none; }
 .approach .approach-hint { font-size: 12px; }
 .approach h3 button span { font-size: 12px; }
+

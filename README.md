@@ -182,3 +182,10 @@ Additional production browser functions:
 phones, Safari/Android, system font differences, real OS lifecycle, assistive
 technology and subjective audio listening remain manual verification limits.
 
+
+## Local review regressions
+
+`qa/review-checks.js` covers player-dismissal focus return, native and simulated
+Arial layouts, visual/audio note states and delayed-start messages. Execute with
+the browser tool against production preview on 4173. `REVIEW.md` records the
+confirmed findings, before/after evidence, fixes and verification limits.

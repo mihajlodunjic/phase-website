@@ -1,5 +1,5 @@
 ﻿import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { AudioEngine } from './audioEngine'
+import { AudioEngine, audioStatus } from './audioEngine'
 import type { createSynthVoice, SynthVoice } from './synth'
 import { AUDIO_STUDIES } from './studies'
 
@@ -187,4 +187,15 @@ describe('audio lifecycle and consent', () => {
     expect(engine.getSnapshot().volume).toBe(0)
     engine.dispose()
   })
+  it('provides readable feedback while sound or a study is waiting to start', async () => {
+    const { engine } = fixture()
+    const enabling = engine.enable()
+    expect(audioStatus(engine.getSnapshot())).toBe('Enabling sound\u2026')
+    await enabling
+    const starting = engine.play('echo')
+    expect(audioStatus(engine.getSnapshot())).toBe('Starting ECHO\u2026')
+    await starting
+    engine.dispose()
+  })
 })
+

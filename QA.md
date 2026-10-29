@@ -500,3 +500,23 @@ push-a, deployment-a ili eksternih servisa.
 Dopunska završna provera: brief Generate i ručna selekcija prolaze i sa potpuno
 isključenim WebGL-om (`briefWithoutWebGL=true` u phase5 fixture-u). Ponovljeni su
 finalni typecheck, svih 45 testova i production build, bez novih grešaka.
+
+## Revizija posle faze 5 — 2026-10-29
+
+Konkretni nalazi, uticaj, dokazi pre/posle i preostala performance ograničenja su
+u `REVIEW.md`. Četiri potvrđena problema su ispravljena: gubitak fokusa pri
+Sound off, 320 px overflow pri Arial display fallback-u, protivrečna Visual only
+poruka tokom playback-a i oštećena ellipsis poruka za pending audio start.
+
+Prošli finalni typecheck, production build i **46 unit testova / 8 fajlova**.
+Novi `qa/review-checks.js` prolazi 10 native/Arial layout kombinacija i konkretne
+focus/status regresije. Ponovljeni phase5 UI/access, studies, scene, audio-state,
+audio-edge, audio-endings i performance fixture-i prolaze. Sva četiri real-time
+završetka opet su sačekana; 0 voices, 4 shared nodes, 1 context i nulta energija.
+
+Novi performance uzorak: desktop warm RAF p95 18.6 ms, mobilna emulacija 18.7 ms;
+GPU mesh draw p50 ~3.68 / 1.78 ms, bez warm long tasks. Startup long task do
+248 / 285 ms i veliki lazy scene chunk ostaju. Scena nije menjana pa se različit
+RAF ritam u odnosu na ranije ne pripisuje UI ispravkama. 60 fps nije potvrđeno.
+Fizički uređaji, Safari/screen reader, real OS lifecycle i slušanje ostaju
+neprovereni; opseg, resursi, backend i dokazi navedeni su u `REVIEW.md`.

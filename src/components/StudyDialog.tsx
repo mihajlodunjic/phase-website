@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from 'react'
+﻿import { useLayoutEffect, useRef, useState } from 'react'
 import type { StudyId } from '../data/content'
 import { studies } from '../data/content'
 import { trapModalTab } from '../lib/modalFocus'
@@ -36,9 +36,10 @@ export function StudyDialog({ selected, open, motion, onSelect, onClose }: Props
         <div className="study-panel-controls"><button className="button" disabled={!motion.enabled || audioPlaying} onClick={event => {
           setReplay(value => value + 1)
           event.currentTarget.closest('[role=tabpanel]')?.querySelector('.panel-visual')?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
-        }}>Replay motion <span aria-hidden="true">↻</span></button><span className="panel-sound-status">Visual only</span></div>
+        }}>Replay motion <span aria-hidden="true">↻</span></button><span className="panel-sound-status">{!motion.enabled ? 'Static visual' : audioPlaying ? 'Following sound' : 'Visual preview'}</span></div>
       </div>
     </div>)}
     <div className="study-dialog-bottom"><PanelAudioControls id={selected} /><MotionControl motion={motion} context="in study" /></div>
   </dialog>
 }
+

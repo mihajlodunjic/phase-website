@@ -221,3 +221,4 @@ Visit https://react.dev/link/error-boundaries to learn more about error boundari
 [38493867ms] [WARNING] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://127.0.0.1:5173/@vite/client:367
 [40045004ms] [WARNING] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://127.0.0.1:4173/assets/Scene-Gwd7Zi4u.js:0
 [40046085ms] [WARNING] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://127.0.0.1:4173/assets/Scene-Gwd7Zi4u.js:0
+[42665576ms] [WARNING] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://127.0.0.1:4173/assets/Scene-Dx_MTTxU.js:0

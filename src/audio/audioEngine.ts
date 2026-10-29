@@ -238,7 +238,7 @@ export function audioStatus(snapshot: AudioSnapshot) {
   if (!snapshot.supported) return 'Audio is unavailable in this browser.'
   if (snapshot.status === 'error') return snapshot.error!
   if (snapshot.status === 'off') return 'Sound off.'
-  if (snapshot.status === 'starting') return name ? `Starting ${name}â€¦` : 'Enabling soundâ€¦'
+  if (snapshot.status === 'starting') return name ? `Starting ${name}\u2026` : 'Enabling sound\u2026'
   if (snapshot.status === 'playing') return `Playing ${name}.`
   if (snapshot.status === 'ready') return 'Sound enabled. Choose a study.'
   if (snapshot.reason === 'hidden') return 'Stopped while this tab was hidden. Press Play to start again.'
@@ -246,4 +246,5 @@ export function audioStatus(snapshot: AudioSnapshot) {
   if (snapshot.reason === 'ended') return `${name} finished.`
   return name ? `${name} stopped.` : 'Not playing.'
 }
+
 

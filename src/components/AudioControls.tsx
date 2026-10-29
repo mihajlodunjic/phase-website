@@ -23,7 +23,7 @@ export function AudioPlayButton({ id, hero = false }: { id: AudioId; hero?: bool
 
 export function SoundToggle() {
   const { engine, snapshot } = useAudio()
-  return <button className="sound-toggle" disabled={!snapshot.supported} aria-pressed={snapshot.enabled} aria-label={snapshot.supported ? snapshot.enabled ? 'Turn sound off' : 'Enable sound' : 'Audio unavailable'} title="Enable sound without starting a study" onClick={() => { if (snapshot.enabled) engine.disable(); else void engine.enable() }}>
+  return <button className="sound-toggle" disabled={!snapshot.supported} aria-pressed={snapshot.enabled} aria-label={snapshot.supported ? snapshot.enabled ? 'Turn sound off' : 'Enable sound' : 'Audio unavailable'} title={snapshot.enabled ? 'Turn sound off' : 'Enable sound without starting a study'} onClick={() => { if (snapshot.enabled) engine.disable(); else void engine.enable() }}>
     <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 8h3l4-4v12l-4-4H2z" />{snapshot.enabled ? <path d="M13 6q5 4 0 8m-2-6q2 2 0 4" /> : <path d="m13 7 5 6m0-6-5 6" />}</svg>
     <span className="sound-label">{!snapshot.supported ? 'Sound unavailable' : snapshot.enabled ? 'Sound enabled' : 'Sound off'}</span>
   </button>
@@ -57,14 +57,36 @@ function AudioProgress() {
 
 export function GlobalAudioPlayer() {
   const { engine, snapshot } = useAudio()
-  if (!snapshot.enabled && snapshot.status !== 'error') return null
+  const player = useRef<HTMLElement>(null)
+  const returnFocus = useRef<HTMLElement | null>(null)
+  const visible = snapshot.enabled || snapshot.status === 'error'
+  useEffect(() => {
+    if (!visible) return
+    const remember = (target: EventTarget | null) => {
+      if (target instanceof HTMLElement && target.matches('button, a[href], input, select, textarea') && !player.current?.contains(target)) returnFocus.current = target
+    }
+    remember(document.activeElement)
+    const focus = (event: FocusEvent) => remember(event.target)
+    document.addEventListener('focusin', focus)
+    return () => document.removeEventListener('focusin', focus)
+  }, [visible])
+  const disable = () => {
+    const previous = returnFocus.current
+    engine.disable()
+    const target = previous?.isConnected && previous.getClientRects().length ? previous : document.querySelector<HTMLElement>('.sound-toggle')
+    if (!target) return
+    target.focus({ preventScroll: true })
+    const bounds = target.getBoundingClientRect()
+    if (bounds.top < 0 || bounds.bottom > innerHeight) target.scrollIntoView({ block: 'nearest', behavior: 'instant' })
+  }
+  if (!visible) return null
   const active = snapshot.status === 'playing' || snapshot.status === 'starting'
-  return <aside className="global-audio-player" aria-label="Audio player">
+  return <aside ref={player} className="global-audio-player" aria-label="Audio player">
     <div className="player-state"><span className="playback-dot" data-playing={snapshot.status === 'playing'} aria-hidden="true" /><p role="status">{audioStatus(snapshot)}</p></div>
     {snapshot.lastId && <AudioProgress />}
     {active ? <button className="player-stop" aria-label="Stop playback" onClick={() => engine.stop()}>■ <span>Stop</span></button> : snapshot.lastId ? <button className="player-stop" aria-label="Play again" onClick={() => { void engine.play(snapshot.lastId!) }}>▷ <span>Play again</span></button> : <a className="player-choose" href="#work">Choose a study</a>}
     <VolumeControl />
-    <button className="player-off" aria-label="Turn sound off" onClick={() => engine.disable()}>Sound off</button>
+    <button className="player-off" aria-label="Turn sound off" onClick={disable}>Sound off</button>
   </aside>
 }
 
@@ -82,4 +104,5 @@ export function AudioDiagnostics() {
   }, [engine, inspect])
   return inspect ? <div ref={ref} hidden data-audio-debug="" data-contexts={engine.stats.contexts} data-voices={engine.stats.voices} data-max-voices={engine.stats.maxVoices} data-nodes={engine.stats.nodes} data-state={snapshot.status} data-active={snapshot.activeId || ''} data-last={snapshot.lastId || ''} data-reason={snapshot.reason || ''} data-enabled={snapshot.enabled} data-volume={snapshot.volume} /> : null
 }
+
 
